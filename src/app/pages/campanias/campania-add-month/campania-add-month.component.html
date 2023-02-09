@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div style="text-align: end;">
+                    <a routerLink="/dashboard/listado-grupos" class="btn btn-primary"><i
+                            class="mdi mdi-arrow-left-bold"></i> Regresar</a>
+                </div>
+                <h3>DATOS PARA CONFIGURAR CAMAPAÑA MENSUAL</h3>
+                <hr>
+                <form (submit)="create()" [formGroup]="monthForm">
+                    <div class="row p-t-20">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Año en curso</label>
+                                <input type="text" id="firstName" class="form-control" placeholder="Nombre del grupo"
+                                    formControlName="year" readonly>
+                                <!-- <small class="form-control-feedback"> This is inline help </small> -->
+                            </div>
+                        </div>
+ 
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Mes a registrar</label>
+                                <select class="form-control custom-select" formControlName="month">
+                                    <option value="1">Enero</option>
+                                    <option value="2">Febrero</option>
+                                    <option value="3">Marzo</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5">Mayo</option>
+                                    <option value="6">Junio</option>
+                                    <option value="7">Julio</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Dias hábiles a del mes</label>
+                                <input type="text" id="firstName" class="form-control" (keyup)="calculeFullHours()" placeholder="Nombre del grupo" [(ngModel)]="fullDays" formControlName="days">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Número de agentes</label>
+                                <input type="text" id="firstName" class="form-control" (keyup)="calculeFullHours()" placeholder="Número de agentes" [(ngModel)]="agents" formControlName="agents">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Jornada en hrs al día</label>
+                                <input type="text" id="firstName" class="form-control" (keyup)="calculeFullHours()" placeholder="Jornada en hrs al día" [(ngModel)]="hours" formControlName="hours">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Precio por hora</label>
+                                <input type="text" id="firstName" class="form-control" (keyup)="calculeFullTotal()" placeholder="Precio por hora" [(ngModel)]="priceHours" formControlName="price">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de moneda</label>
+                                <select class="form-control custom-select" formControlName="currency">
+                                    <option value="1">MXN</option>
+                                    <option value="2">USD</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Total de horas</label>
+                            <input type="text" id="firstName" class="form-control" [(ngModel)]="fullHours" placeholder="Total de horas" formControlName="totalHours" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Total en costo</label>
+                                <input type="text" id="firstName" class="form-control" placeholder="Total en costo" [(ngModel)]="fullTotal" formControlName="fullCost" readonly>
+                            </div>
+                        </div>
+                
+                        <!--/span-->
+                    </div>
+                
+                
+                
+                
+                
+                    <div mat-dialog-actions class="btn-create">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button class="btn btn-warning">No Thanks</button>
+                    </div>
+                </form>
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+

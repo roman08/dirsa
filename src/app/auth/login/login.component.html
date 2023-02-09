@@ -1,0 +1,49 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<section id="wrapper" class="login-register login-sidebar"
+    style="background-image:url(./assets/images/background/login-home.jpg);">
+    <div class="login-box card">
+        <div class="card-body">
+            <form [formGroup]="loginForm" class="form-horizontal form-material" id="loginform" (submit)="login()">
+                <a href="javascript:void(0)" class="text-center db"><img src="./assets/images/logo-dirsa.png"
+                        alt="Home" /><br /></a>
+                <div class="form-group m-t-40">
+                    <div class="col-xs-12">
+            
+                        <input class="form-control" type="text" required="" placeholder="Usuario" formControlName="usuario"
+                            [ngClass]="{ 'is-invalid': usuario?.invalid && usuario?.touched }">
+                        <div *ngIf="usuario?.errors" class="invalid-feedback">
+                            <div *ngIf="usuario?.errors?.['required'] && usuario?.touched">El usuario es requerido.</div>
+                            <!-- <div *ngIf="correo?.errors?.['pattern'] && correo?.touched">Ingrese un correo valido.</div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="password" required="" placeholder="Contraseña" formControlName="password"
+                            [ngClass]="{ 'is-invalid': password?.invalid && password?.touched }">
+                        <div *ngIf="password?.errors" class="invalid-feedback">
+                            <div *ngIf="password?.errors?.['required'] && password?.touched">La contraseña es requerida.</div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button class="btn btn-info btn-lg btn-block text-uppercase btn-rounded" [disabled]="loginForm.invalid"
+                            type="submit">Ingresar</button>
+                        <a routerLink="/cambiar-password" class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
+                            type="submit">Olvide mi contraseña</a>
+                    </div>
+                </div>
+            
+            
+            </form>
+            
+        </div>
+    </div>
+</section>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
