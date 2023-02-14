@@ -54,7 +54,7 @@ export class LoadFileComponent implements OnInit {
 
     const formData = new FormData();
     formData.append(
-      'uploaded_files',
+      'uploaded_file',
       this.fileUploadForm.controls['myfile'].value
     );
 
