@@ -12,6 +12,8 @@ import { GroupCreateComponent } from './groups/group-create/group-create.compone
 import { CampaniaListComponent } from './campanias/campania-list/campania-list.component';
 import { CampaniaCreateComponent } from './campanias/campania-create/campania-create.component';
 import { CampaniaAddMonthComponent } from './campanias/campania-add-month/campania-add-month.component';
+import { AgentsListComponent } from './agents/agents-list/agents-list.component';
+import { LoadFileComponent } from './agents/load-file/load-file.component';
 
 
 
@@ -72,6 +74,18 @@ const routes: Routes = [
         path: 'add-month-campania/:id',
         component: CampaniaAddMonthComponent,
         data: { titulo: 'Agregar mes' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'agents',
+        component: AgentsListComponent,
+        data: { titulo: 'Agentes' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'load-file',
+        component: LoadFileComponent,
+        data: { titulo: 'Carga de archivo' },
         canActivate: [AccesoGuard],
       },
       //   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

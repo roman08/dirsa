@@ -24,6 +24,11 @@ export class SidebarService {
           url: '/as',
           roles: [{ name: 'Agente' }],
         },
+        {
+          titulo: 'Agentes',
+          url: 'agents',
+          roles: [{ name: 'Administrador' }],
+        },
       ],
     },
   ];
