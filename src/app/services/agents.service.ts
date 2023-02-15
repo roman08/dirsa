@@ -12,8 +12,8 @@ export class AgentsService {
   baseUrl: string = environment.api;
   constructor(private http: HttpClient, private _srvStorage: StorageService) {}
 
-  upload(data: FormData): Observable<any> {
-    const URL = this.baseUrl + 'checkHours/importData';
+  upload(data: { data: string | undefined; user_id: number; tipo_fuente: any; }): Observable<any> {
+    const URL = this.baseUrl + 'checkHours/loadJson';
     // const token = 'Bearer ' + this.storageSrv.get('token');
 
     const headers = new HttpHeaders().set('Accept', 'application/json');
