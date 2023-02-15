@@ -25,6 +25,7 @@ export class LoadFileComponent implements OnInit {
   ngOnInit(): void {
     this.fileUploadForm = this.formBuilder.group({
       myfile: [''],
+      fuente: [1]
     });
   }
 
@@ -51,8 +52,11 @@ export class LoadFileComponent implements OnInit {
       alert('Please fill valid details!');
       return false;
     }
-
+    
+    const fuente = this.fileUploadForm.controls['fuente'].value;
+    
     const formData = new FormData();
+    
     formData.append(
       'uploaded_file',
       this.fileUploadForm.controls['myfile'].value
@@ -60,15 +64,10 @@ export class LoadFileComponent implements OnInit {
 
     let payload = JSON.stringify({
       user_id: 1,
-      tipo_fuente: 1,
+      tipo_fuente: fuente,
     });
     formData.append('payload', payload);
 
-    console.log(formData);
-    // const body = {
-    //   uploaded_file: formData,
-    //   user_id: 1,
-    // };
     this._srvAgents.upload(formData).subscribe((event: HttpEvent<any>) => {
       console.log(event);
 

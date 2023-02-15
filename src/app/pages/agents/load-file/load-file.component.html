@@ -17,15 +17,22 @@
                 <div class="card-body">
                     <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
                         <div class="row">
-                            <div class="col-sm-6 text-center">
+                            <div class="col-sm-4 text-center">
                                 <div class="form-group">
                                     <label class="control-label">Fuente de origen</label>
-                                    <select class="form-control custom-select">
+                                    <select class="form-control custom-select" formControlName="fuente">
                                         <option value="1">COX</option>
+                                        <option value="2">TALA</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6 text-center centered-div">
+                            <div class="col-sm-4 text-center">
+                                <div class="form-group">
+                                    <label class="control-label">Fecha del reporte</label>
+                                    <input type="date" name="" id="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 text-center centered-div">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile" name="myfile"
                                         (change)="onFileSelect($event)" #UploadFileInput hidden>
