@@ -1,1 +1,88 @@
-<p>dashboard works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card bg-primary">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center">
+                                        <!-- <img src="../assets/images/icon/income-w.png"
+                                            alt="Income"> -->
+                                            <i class="mdi mdi-human-handsdown"></i>
+                                        </div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Agentes totales</h6>
+                                        <h2 class="m-t-0 text-white">100</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card bg-info">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center">
+                                        <i class="mdi mdi-clock"></i>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Horas meta</h6>
+                                        <h2 class="m-t-0 text-white">400 HRS</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card bg-warning">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center"><
+                                        <i class="mdi mdi-clock"></i>    
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Horas sistema</h6>
+                                        <h2 class="m-t-0 text-white">350 HRS</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card bg-danger">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center">
+                                         <i class="mdi mdi-account-off"></i> 
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Agentes en riesgo</h6>
+                                        <h2 class="m-t-0 text-white">10</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="card-title">Horas meta  VS Horas reales</h2>
+                        <h4>Enero 2023</h4>
+                        <hr>
+                        <canvas 
+                            baseChart 
+                            class="chart" 
+                            [data]="lineChartData" 
+                            [options]="lineChartOptions"
+                            [type]="lineChartType" 
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

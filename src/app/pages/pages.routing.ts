@@ -14,6 +14,7 @@ import { CampaniaCreateComponent } from './campanias/campania-create/campania-cr
 import { CampaniaAddMonthComponent } from './campanias/campania-add-month/campania-add-month.component';
 import { AgentsListComponent } from './agents/agents-list/agents-list.component';
 import { LoadFileComponent } from './agents/load-file/load-file.component';
+import { ListCampaniaSupervisorComponent } from './supervisor/list-campania-supervisor/list-campania-supervisor.component';
 
 
 
@@ -86,6 +87,12 @@ const routes: Routes = [
         path: 'load-file',
         component: LoadFileComponent,
         data: { titulo: 'Carga de archivo' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'list-campanias-supervisor',
+        component: ListCampaniaSupervisorComponent,
+        data: { titulo: 'Mi campaña' },
         canActivate: [AccesoGuard],
       },
       //   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

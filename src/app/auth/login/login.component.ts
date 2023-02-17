@@ -42,8 +42,10 @@ export class LoginComponent implements OnInit {
       if (respuesta.status === 'success') {
         this._srvStorage.set('token', respuesta['access_token']);
         this._srvStorage.set('role', respuesta['data']['role']['nombre']);
+        this._srvStorage.set('user_id', respuesta['data']['id']);
+        this._srvStorage.set('user_name', respuesta['data']['nombre_completo']);
 
-        this.router.navigateByUrl('/dashboard/listado-grupos');
+        this.router.navigateByUrl('/dashboard');
       } else {
         swal.fire('Alerta', respuesta.message, 'error');
       }

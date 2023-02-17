@@ -16,13 +16,8 @@ export class AgentsService {
     const URL = this.baseUrl + 'checkHours/loadJson';
     // const token = 'Bearer ' + this.storageSrv.get('token');
 
-    const headers = new HttpHeaders().set('Accept', 'application/json');
 
-    // const body = {
-    //   uploaded_file: data,
-    //   user_id: 1,
-    // };
-    // return this.http.post(URL, data, { headers }).pipe(map((res) => res));
+  
 
     return this.http
       .post(URL, data, {

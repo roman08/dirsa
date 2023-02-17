@@ -20,6 +20,11 @@ export class SidebarService {
           roles: [{ name: 'Administrador' }],
         },
         {
+          titulo: 'Mi Campaña',
+          url: 'list-campanias-supervisor',
+          roles: [{ name: 'Supervior' }],
+        },
+        {
           titulo: 'Test',
           url: '/as',
           roles: [{ name: 'Agente' }],
@@ -27,7 +32,7 @@ export class SidebarService {
         {
           titulo: 'Agentes',
           url: 'agents',
-          roles: [{ name: 'Administrador' }],
+          roles: [{ name: 'Administrador' }, { name: 'Supervior' }],
         },
       ],
     },

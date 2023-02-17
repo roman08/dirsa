@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload';
+import { NgChartsModule } from 'ng2-charts';
 
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
@@ -27,6 +28,7 @@ import { CampaniaCreateComponent } from './campanias/campania-create/campania-cr
 import { CampaniaAddMonthComponent } from './campanias/campania-add-month/campania-add-month.component';
 import { AgentsListComponent } from './agents/agents-list/agents-list.component';
 import { LoadFileComponent } from './agents/load-file/load-file.component';
+import { ListCampaniaSupervisorComponent } from './supervisor/list-campania-supervisor/list-campania-supervisor.component';
 
 const materialModules = [
   MatButtonModule,
@@ -53,6 +55,7 @@ const materialModules = [
     CampaniaAddMonthComponent,
     AgentsListComponent,
     LoadFileComponent,
+    ListCampaniaSupervisorComponent,
   ],
   exports: [
     DashboardComponent,
@@ -71,6 +74,7 @@ const materialModules = [
     materialModules,
     ReactiveFormsModule,
     FileUploadModule,
+    NgChartsModule,
   ],
   entryComponents: [CreateGroupComponent],
 })
