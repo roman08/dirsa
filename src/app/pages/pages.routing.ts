@@ -15,6 +15,7 @@ import { CampaniaAddMonthComponent } from './campanias/campania-add-month/campan
 import { AgentsListComponent } from './agents/agents-list/agents-list.component';
 import { LoadFileComponent } from './agents/load-file/load-file.component';
 import { ListCampaniaSupervisorComponent } from './supervisor/list-campania-supervisor/list-campania-supervisor.component';
+import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 
 
 
@@ -93,6 +94,12 @@ const routes: Routes = [
         path: 'list-campanias-supervisor',
         component: ListCampaniaSupervisorComponent,
         data: { titulo: 'Mi campaña' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'dashboard-admin',
+        component: DashboardAdminComponent,
+        data: { titulo: 'Dashboar Administrador' },
         canActivate: [AccesoGuard],
       },
       //   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

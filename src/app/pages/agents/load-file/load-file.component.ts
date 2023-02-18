@@ -5,6 +5,8 @@ import * as _ from 'lodash';
 import { AgentsService } from 'src/app/services/agents.service';
 import swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
+import { Campania } from 'src/app/models/campania.model';
+import { CampaniasService } from 'src/app/services/campanias.service';
 
 @Component({
   selector: 'app-load-file',
@@ -19,59 +21,31 @@ export class LoadFileComponent implements OnInit {
   progress: number = 0;
   progressTotal: number = 0;
   dataString: string | undefined;
+
+  campanias: Campania[] = [];
+
   constructor(
     private _srvAgents: AgentsService,
-    private formBuilder: FormBuilder
-  ) {
-    let decimalTimeString = '6.498539722';
-    let decimalTime = parseFloat(decimalTimeString);
-    decimalTime = decimalTime * 60 * 60;
-    let hours = Math.floor(decimalTime / (60 * 60));
-    decimalTime = decimalTime - hours * 60 * 60;
-    let minutes = Math.floor(decimalTime / 60);
-    decimalTime = decimalTime - minutes * 60;
-    let seconds = Math.round(decimalTime);
-    if (hours < 10) {
-      let hoursf = '0' + hours;
-    }
-    if (minutes < 10) {
-      let minutesf = '0' + minutes;
-    }
-    if (seconds < 10) {
-      let secondsf = '0' + seconds;
-    }
-
-    const f = hours + ':' + minutes + ':' + seconds;
-
-    console.log(f);
-  }
+    private formBuilder: FormBuilder,
+    private _srvCampania: CampaniasService
+  ) {}
 
   ngOnInit(): void {
+    this.loadCampanias();
     this.fileUploadForm = this.formBuilder.group({
       myfile: [''],
       fuente: [1],
     });
   }
 
+  loadCampanias() {
+    this._srvCampania.getAgentCampanias().subscribe((res) => {
+      this.campanias = res['data'];
+    });
+  }
   onFileSelect(ev: any) {
-    // let af = [
-    //   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    //   'application/vnd.ms-excel',
-    // ];
-    // if (event.target.files.length > 0) {
-    //   const file = event.target.files[0];
-    //   // console.log(file);
-
-    //   if (!_.includes(af, file.type)) {
-    //     alert('Only EXCEL Docs Allowed!');
-    //   } else {
-    //     this.fileInputLabel = file.name;
-    //     this.fileUploadForm?.controls['myfile'].setValue(file);
-    //   }
-    // }
-
     console.log(ev.target);
-    
+
     let workBook: XLSX.WorkBook;
     let jsonData = null;
     const reader = new FileReader();
@@ -87,8 +61,6 @@ export class LoadFileComponent implements OnInit {
       }, {});
       this.dataString = JSON.stringify(jsonData);
       console.log('load');
-      
-      
     };
     reader.readAsBinaryString(file);
   }

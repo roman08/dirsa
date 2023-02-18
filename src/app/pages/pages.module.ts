@@ -29,6 +29,7 @@ import { CampaniaAddMonthComponent } from './campanias/campania-add-month/campan
 import { AgentsListComponent } from './agents/agents-list/agents-list.component';
 import { LoadFileComponent } from './agents/load-file/load-file.component';
 import { ListCampaniaSupervisorComponent } from './supervisor/list-campania-supervisor/list-campania-supervisor.component';
+import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 
 const materialModules = [
   MatButtonModule,
@@ -56,6 +57,7 @@ const materialModules = [
     AgentsListComponent,
     LoadFileComponent,
     ListCampaniaSupervisorComponent,
+    DashboardAdminComponent,
   ],
   exports: [
     DashboardComponent,

@@ -23,6 +23,18 @@ export class CampaniasService {
     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
   }
 
+  getCampaniasAdmin(): Observable<any> {
+    const URL = this.baseUrl + 'campanias/getCampaaniasAdmin';
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
+
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
+
+
   createCampania(data: {
     nombre: any;
     fecha_creacion: any;

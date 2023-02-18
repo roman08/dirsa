@@ -7,11 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./agents-list.component.css'],
 })
 export class AgentsListComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
-  loadFile() {
-    this.router.navigateByUrl('/dashboard/load-file');
-  }
+ 
 }

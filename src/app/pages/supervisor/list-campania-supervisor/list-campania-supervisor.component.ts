@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Campania } from 'src/app/models/campania.model';
 import { CampaniasService } from 'src/app/services/campanias.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -14,17 +15,19 @@ export class ListCampaniaSupervisorComponent implements OnInit {
 
   constructor(
     private _srvCampania: CampaniasService,
-    public _srvStorage: StorageService
+    public _srvStorage: StorageService,
+    private router: Router
   ) {
     this.user_name = JSON.parse(this._srvStorage.get('user_name'));
   }
 
   ngOnInit(): void {
-    
     this._srvCampania.getAgentCampanias().subscribe((res) => {
-      console.log(res);
       this.campanias = res['data'];
-      console.log(this.campanias);
     });
+  }
+
+  loadFile() {
+    this.router.navigateByUrl('/dashboard/load-file');
   }
 }

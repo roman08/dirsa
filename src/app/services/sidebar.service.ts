@@ -6,9 +6,14 @@ import { Injectable } from '@angular/core';
 export class SidebarService {
   menu: any[] = [
     {
-      titulo: 'Dashboard',
+      titulo: 'Menú',
       icon: 'mdi mdi-gauge',
       submenu: [
+        {
+          titulo: 'Dashboard',
+          url: 'dashboard-admin',
+          roles: [{ name: 'Administrador' }],
+        },
         {
           titulo: 'Grupos de agentes',
           url: 'listado-grupos',
@@ -20,19 +25,19 @@ export class SidebarService {
           roles: [{ name: 'Administrador' }],
         },
         {
-          titulo: 'Mi Campaña',
-          url: 'list-campanias-supervisor',
-          roles: [{ name: 'Supervior' }],
-        },
-        {
-          titulo: 'Test',
-          url: '/as',
-          roles: [{ name: 'Agente' }],
-        },
-        {
           titulo: 'Agentes',
           url: 'agents',
-          roles: [{ name: 'Administrador' }, { name: 'Supervior' }],
+          roles: [{ name: 'Administrador' }],
+        },
+        {
+          titulo: 'Dashboard',
+          url: '/dashboard',
+          roles: [{ name: 'Lider' }],
+        },
+        {
+          titulo: 'Mi Campaña',
+          url: 'list-campanias-supervisor',
+          roles: [{ name: 'Lider' }],
         },
       ],
     },

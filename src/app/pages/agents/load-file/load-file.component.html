@@ -21,8 +21,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Fuente de origen</label>
                                     <select class="form-control custom-select" formControlName="fuente">
-                                        <option value="1">COX</option>
-                                        <option value="2">TALA</option>
+                                        <option [value]="campania.id" *ngFor="let campania of campanias">{{ campania.nombre }}</option>
                                     </select>
                                 </div>
                             </div>
