@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgChartsModule } from 'ng2-charts';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
@@ -30,6 +31,8 @@ import { AgentsListComponent } from './agents/agents-list/agents-list.component'
 import { LoadFileComponent } from './agents/load-file/load-file.component';
 import { ListCampaniaSupervisorComponent } from './supervisor/list-campania-supervisor/list-campania-supervisor.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
+import { BillinguePipe } from '../pipes/billingue.pipe';
+import { CampaniaEditComponent } from './campanias/campania-edit/campania-edit.component';
 
 const materialModules = [
   MatButtonModule,
@@ -58,6 +61,8 @@ const materialModules = [
     LoadFileComponent,
     ListCampaniaSupervisorComponent,
     DashboardAdminComponent,
+    BillinguePipe,
+    CampaniaEditComponent,
   ],
   exports: [
     DashboardComponent,
@@ -66,6 +71,7 @@ const materialModules = [
     PagesComponent,
     AccountSettingsComponent,
     materialModules,
+    BillinguePipe,
   ],
   imports: [
     CommonModule,
@@ -77,6 +83,7 @@ const materialModules = [
     ReactiveFormsModule,
     FileUploadModule,
     NgChartsModule,
+    NgxPaginationModule,
   ],
   entryComponents: [CreateGroupComponent],
 })

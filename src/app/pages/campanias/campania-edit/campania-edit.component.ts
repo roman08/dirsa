@@ -1,33 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Group } from 'src/app/models/group.mode';
-import { Leader } from 'src/app/models/leader.model';
-import { TypePay } from 'src/app/models/typePay.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Group, Leader, TypePay } from 'src/app/models/campania.model';
 import { CampaniasService } from 'src/app/services/campanias.service';
 import { GeneralService } from 'src/app/services/general.service';
 import { GroupService } from 'src/app/services/group.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-campania-create',
-  templateUrl: './campania-create.component.html',
-  styleUrls: ['./campania-create.component.css'],
+  selector: 'app-campania-edit',
+  templateUrl: './campania-edit.component.html',
+  styleUrls: ['./campania-edit.component.css'],
 })
-export class CampaniaCreateComponent implements OnInit {
+export class CampaniaEditComponent implements OnInit {
+  id_campania: any;
+
   campaniaForm: FormGroup;
   idTypeAgent: number = 0;
   typePays: TypePay[] = [];
   leaders: Leader[] = [];
   groups: Group[] = [];
   typeCampania: any;
-  
+
+  typeModel: number = 0;
+  liderModel: number = 0;
+  grupoModel: number = 0;
+  nameModel: string = '';
+  fInicioModel: string = '';
+
   constructor(
+    private route: ActivatedRoute,
+    private _srvCampania: CampaniasService,
     private _srvGeneral: GeneralService,
     private formBuilder: FormBuilder,
     private _srvGroup: GroupService,
-    private router: Router,
-    private _srvCampanias: CampaniasService
+    private router: Router
   ) {
     this.campaniaForm = this.formBuilder.group({
       nombre: new FormControl(''),
@@ -40,6 +47,7 @@ export class CampaniaCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id_campania = this.route.snapshot.paramMap.get('id');
     this._srvGeneral.getTypePays().subscribe((res) => {
       this.typePays = res.data;
     });
@@ -50,7 +58,24 @@ export class CampaniaCreateComponent implements OnInit {
 
     this._srvGeneral.getLeaders().subscribe((res) => {
       this.leaders = res.data;
-      console.log(this.leaders);
+    });
+
+    this.getCampania(this.id_campania);
+  }
+
+  getCampania(id: number) {
+    this._srvCampania.geyById(id).subscribe((res) => {
+      if (res.status == 'success') {
+        const data = res.data;
+        console.log(data);
+
+        this.liderModel = data.leaders[0].id;
+        this.grupoModel = data.groups[0].id;
+        this.typeModel = data.id_forma_de_pago;
+        this.nameModel = data.nombre;
+        this.fInicioModel = data.fecha_creacion;
+        this.typeCampania = data.bilingue;
+      }
     });
   }
 
@@ -69,17 +94,18 @@ export class CampaniaCreateComponent implements OnInit {
       id_forma_de_pago: id_forma_de_pago,
       id_supervisor: id_supervisor,
       id_grupo: id_grupo,
+      id: this.id_campania
     };
 
-
-    this._srvCampanias.createCampania( body ).subscribe( res => {
+    console.log(body);
+    
+    this._srvCampania.update(body).subscribe((res) => {
       console.log(res);
       if (res.status == 'success') {
         swal.fire('Alerta', res.message, 'success');
         this.router.navigateByUrl('/dashboard/listado-campanias');
         // /dashboard/adilost - camapnias;
       }
-      
     });
   }
 }

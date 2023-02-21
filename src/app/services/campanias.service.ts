@@ -34,7 +34,6 @@ export class CampaniasService {
     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
   }
 
-
   createCampania(data: {
     nombre: any;
     fecha_creacion: any;
@@ -82,5 +81,36 @@ export class CampaniasService {
       .set('Authorization', token);
 
     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
+
+  delete(id: number): Observable<any> {
+    const URL = this.baseUrl + `campanias/delete?id=${id}`;
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
+
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
+
+  geyById(id: number): Observable<any> {
+    const URL = this.baseUrl + `campanias/getById?id=${id}`;
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
+
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
+
+  update( data: { nombre: any; fecha_creacion: any; bilingue: any; id_forma_de_pago: any; id_supervisor: any; id_grupo: any; id: any; }) : Observable<any> {
+        const URL = this.baseUrl + 'campania/update';
+        // const token = 'Bearer ' + this.storageSrv.get('token');
+
+        const headers = new HttpHeaders().set('Accept', 'application/json');
+
+        return this.http.post(URL, data, { headers }).pipe(map((res) => res));
   }
 }

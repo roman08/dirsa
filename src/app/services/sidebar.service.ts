@@ -15,15 +15,16 @@ export class SidebarService {
           roles: [{ name: 'Administrador' }],
         },
         {
-          titulo: 'Grupos de agentes',
-          url: 'listado-grupos',
-          roles: [{ name: 'Administrador' }],
-        },
-        {
           titulo: 'Campañas',
           url: 'listado-campanias',
           roles: [{ name: 'Administrador' }],
         },
+        {
+          titulo: 'Grupos de agentes',
+          url: 'listado-grupos',
+          roles: [{ name: 'Administrador' }],
+        },
+        
         {
           titulo: 'Agentes',
           url: 'agents',
@@ -41,6 +42,7 @@ export class SidebarService {
         },
       ],
     },
+    
   ];
   constructor() {}
 }

@@ -16,6 +16,7 @@ import { AgentsListComponent } from './agents/agents-list/agents-list.component'
 import { LoadFileComponent } from './agents/load-file/load-file.component';
 import { ListCampaniaSupervisorComponent } from './supervisor/list-campania-supervisor/list-campania-supervisor.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
+import { CampaniaEditComponent } from './campanias/campania-edit/campania-edit.component';
 
 
 
@@ -100,6 +101,12 @@ const routes: Routes = [
         path: 'dashboard-admin',
         component: DashboardAdminComponent,
         data: { titulo: 'Dashboar Administrador' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'campania-edit/:id',
+        component: CampaniaEditComponent,
+        data: { titulo: 'Editar campaña' },
         canActivate: [AccesoGuard],
       },
       //   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

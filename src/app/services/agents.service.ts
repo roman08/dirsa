@@ -39,4 +39,26 @@ export class AgentsService {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
+
+  getAllAgents(): Observable<any>{
+        const URL = this.baseUrl + 'agents/all';
+        const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+        const headers = new HttpHeaders()
+          .set('Accept', 'application/json')
+          .set('Authorization', token);
+
+        return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
+
+  getAgentesPaginate(page: number): Observable<any> {
+    const URL = this.baseUrl + `agents/all/?page=${page}`;
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
+
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
 }

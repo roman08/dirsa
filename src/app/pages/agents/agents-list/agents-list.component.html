@@ -21,33 +21,25 @@
                         </thead>
                         <tbody>
                             <!-- TODO : LISTADO CAMAPAÑAS -->
-                            <tr >
+                            <tr *ngFor="let agent of agents  | paginate: { id: 'server', itemsPerPage: 10, currentPage: p, totalItems: total }">
                                 <td>2</td>
                                 <td>3</td>
                                 <td>4</td>
-                                <td>5</td>
+                                <td>{{ agent.nombre_completo }}</td>
                                 <td>6</td>
                                 <td>7</td>
                                 <td>8</td>
                                 <td>9</td>
                             </tr>
-                            <!-- <tr *ngFor="let campania of campanias">
-                                <td>{{campania.id }}</td>
-                                <td>{{campania.fecha_creacion }}</td>
-                                <td>{{campania.nombre }}</td>
-                                <td>{{campania.leaders[0].nombre_completo }}</td>
-                                <td>{{campania.bilingue }}</td>
-                                <td>{{campania.type_pay.name }}</td>
-                                <td><a href="#">{{ campania.months.length}}</a></td>
-                                <td class="actions">
-                                    <a href="#"><i class="mdi mdi-eye"></i></a>
-                                    <a href="#"><i class="mdi mdi-pencil"></i></a>
-                                    <a href="#"><i class="mdi mdi-delete"></i></a>
-                                </td>
-                            </tr> -->
+
                         </tbody>
                     </table>
-                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                    <pagination-controls 
+                        (pageChange)="pageChange($event)" 
+                        id="server"
+                        previousLabel="Anterior"
+                        nextLabel="Siguiente">
+                    </pagination-controls>
                 </div>
             </div>
         </div>
