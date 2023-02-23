@@ -10,7 +10,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Nombre del grupo</label>
-                                <input type="text" id="firstName" class="form-control" placeholder="Nombre del grupo" formControlName="nombre">
+                                <input type="text" id="firstName" class="form-control" placeholder="Nombre del grupo"
+                                    formControlName="nombre" [(ngModel)]="nombreModel">
                                 <!-- <small class="form-control-feedback"> This is inline help </small> -->
                             </div>
                         </div>
@@ -18,7 +19,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Tipo de agente</label>
-                                <select class="form-control custom-select" [(ngModel)]="idTypeAgent" (change)="getAgents()" formControlName="idTypeAgent">
+                                <select class="form-control custom-select" [(ngModel)]="idTypeAgent"
+                                    (change)="getAgents()" formControlName="idTypeAgent">
                                     <option value="0">SELECCIONES UN TIPO DE AGENTE</option>
                                     <option value="1">TRADICIONAL</option>
                                     <option value="2">BILINGÜE</option>

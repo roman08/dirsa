@@ -17,6 +17,8 @@ import { LoadFileComponent } from './agents/load-file/load-file.component';
 import { ListCampaniaSupervisorComponent } from './supervisor/list-campania-supervisor/list-campania-supervisor.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { CampaniaEditComponent } from './campanias/campania-edit/campania-edit.component';
+import { GroupEditComponent } from './groups/group-edit/group-edit.component';
+import { GroupShowComponent } from './groups/group-show/group-show.component';
 
 
 
@@ -107,6 +109,18 @@ const routes: Routes = [
         path: 'campania-edit/:id',
         component: CampaniaEditComponent,
         data: { titulo: 'Editar campaña' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'group-edit/:id',
+        component: GroupEditComponent,
+        data: { titulo: 'Editar grupo' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'group-show/:id',
+        component: GroupShowComponent,
+        data: { titulo: 'Detalle grupo' },
         canActivate: [AccesoGuard],
       },
       //   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

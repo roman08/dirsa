@@ -33,6 +33,8 @@ import { ListCampaniaSupervisorComponent } from './supervisor/list-campania-supe
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { BillinguePipe } from '../pipes/billingue.pipe';
 import { CampaniaEditComponent } from './campanias/campania-edit/campania-edit.component';
+import { GroupEditComponent } from './groups/group-edit/group-edit.component';
+import { GroupShowComponent } from './groups/group-show/group-show.component';
 
 const materialModules = [
   MatButtonModule,
@@ -63,6 +65,8 @@ const materialModules = [
     DashboardAdminComponent,
     BillinguePipe,
     CampaniaEditComponent,
+    GroupEditComponent,
+    GroupShowComponent,
   ],
   exports: [
     DashboardComponent,
