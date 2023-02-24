@@ -102,7 +102,7 @@ const routes: Routes = [
       {
         path: 'dashboard-admin',
         component: DashboardAdminComponent,
-        data: { titulo: 'Dashboar Administrador' },
+        data: { titulo: 'Dashboard Administrador' },
         canActivate: [AccesoGuard],
       },
       {

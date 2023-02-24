@@ -9,22 +9,22 @@
             <ul id="sidebarnav">
                 <li class="user-profile">
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img
-                            src="./assets/images/users/profile.png" alt="user" /><span class="hide-menu">Steave Jobs
+                            [src]="imgProfile" alt="user" /><span class="hide-menu">{{ nameUser }}
                         </span></a>
                     <ul aria-expanded="false" class="collapse">
 
-                        <li><a routerLink="acount-settings">Account Setting</a></li>
-                        <li><a routerLink="" (click)="logout()" style="cursor: pointer;">Logout</a></li>
+                        <!-- <li><a routerLink="acount-settings">Account Setting</a></li> -->
+                        <li><a routerLink="" (click)="logout()" style="cursor: pointer;">Cerrar sesión</a></li>
                     </ul>
                 </li>
                 <li class="nav-devider"></li>
-                <li class="nav-small-cap">PERSONAL</li>
+                <li class="nav-small-cap">SISTEMA CONTROL DE HORARIOS EN CAMPAÑAS</li>
                 <li *ngFor="let item of menuItems"> 
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                         <i  class="mdi mdi-gauge"></i>
                         <span class="hide-menu">
                             {{ item.titulo }} 
-                            <span class="label label-rouded label-themecolor pull-right">{{ item.submenu.length }}</span>
+                            <span class="label label-rouded label-themecolor pull-right">4</span>
                         </span>
                     </a>
                     <ul aria-expanded="false" class="collapse">

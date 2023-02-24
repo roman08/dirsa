@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-
   login() {
     const usuario = this.loginForm.value['usuario'];
     const password = this.loginForm.value['password'];
@@ -45,14 +44,29 @@ export class LoginComponent implements OnInit {
         this._srvStorage.set('role', role);
         this._srvStorage.set('user_id', respuesta['data']['id']);
         this._srvStorage.set('user_name', respuesta['data']['nombre_completo']);
+        this._srvStorage.set('img_profile', respuesta['data']['img_profile']);
+        this._srvStorage.set('email', respuesta['data']['email']);
 
-        if (role == 'Administrador'){
+        if (role == 'Administrador') {
           this.router.navigateByUrl('/dashboard/dashboard-admin');
-        } else{
+        } else {
           this.router.navigateByUrl('/dashboard');
         }
       } else {
         swal.fire('Alerta', respuesta.message, 'error');
+
+
+
+        swal.fire({
+          title: '<strong><u>DIRSA</u></strong>',
+          icon: 'error',
+          html: respuesta.message,
+          showCloseButton: true,
+          showCancelButton: false,
+          focusConfirm: false,
+          confirmButtonText: 'Cerrar',
+
+        });
       }
     });
   }
