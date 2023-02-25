@@ -19,6 +19,7 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
 import { CampaniaEditComponent } from './campanias/campania-edit/campania-edit.component';
 import { GroupEditComponent } from './groups/group-edit/group-edit.component';
 import { GroupShowComponent } from './groups/group-show/group-show.component';
+import { CampaniaListDetailComponent } from './supervisor/campania-list-detail/campania-list-detail.component';
 
 
 
@@ -121,6 +122,12 @@ const routes: Routes = [
         path: 'group-show/:id',
         component: GroupShowComponent,
         data: { titulo: 'Detalle grupo' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'campania-detail/:id',
+        component: CampaniaListDetailComponent,
+        data: { titulo: 'Detalle campaña' },
         canActivate: [AccesoGuard],
       },
       //   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

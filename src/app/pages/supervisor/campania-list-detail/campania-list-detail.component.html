@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="text-align: end;"><button class="btn btn-primary" (click)="loadFile()"
+                        value=""><i class="mdi mdi-plus"></i> Cargar archivo</button></h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>No. agentes autorizados</th>
+                                <th>Horas meta </th>
+                                <th>Horas sistema</th>
+                                <th>Estatus</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let detail of details; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ detail.fecha | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ num_agents }}</td>
+                                <td>{{ horas_meta }}</td>
+                                <td>{{ detail.tiempo_total  }}</td>
+                                <td><span class="label  label-rounded label-success">REGISTRADO</span></td>
+                                <td class="actions">
+                                    <a [routerLink]="['/dashboard/campania-detail', 1 ]"><i
+                                            class="mdi mdi-eye"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

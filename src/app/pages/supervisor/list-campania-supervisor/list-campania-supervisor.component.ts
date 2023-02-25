@@ -16,7 +16,7 @@ export class ListCampaniaSupervisorComponent implements OnInit {
   constructor(
     private _srvCampania: CampaniasService,
     public _srvStorage: StorageService,
-    private router: Router
+    
   ) {
     this.user_name = JSON.parse(this._srvStorage.get('user_name'));
   }
@@ -27,7 +27,5 @@ export class ListCampaniaSupervisorComponent implements OnInit {
     });
   }
 
-  loadFile() {
-    this.router.navigateByUrl('/dashboard/load-file');
-  }
+
 }
