@@ -48,4 +48,15 @@ export class GeneralService {
 
     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
   }
+
+  getOrigins(): Observable<any> {
+    const URL = this.baseUrl + 'origins';
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
+
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
 }

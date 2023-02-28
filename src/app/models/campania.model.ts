@@ -11,6 +11,7 @@ export class Campania {
   leaders!: Leader[];
   type_pay!: TypePay;
   months!: Month[];
+  id_type_origin!: number;
 }
 
 export class  Group {

@@ -47,6 +47,16 @@
                         <!--/span-->
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label class="control-label">Origen de datos</label>
+                                <select class="form-control custom-select" formControlName="origin" [(ngModel)]="originData">
+                                    <option value="0">SELECCIONES UNA OPCIÓN</option>
+                                    <option [value]="origin.id" *ngFor="let origin of origins">{{ origin.name
+                                        }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label class="control-label">Lider asignado</label>
                                 <select class="form-control custom-select" formControlName="leader">
                                     <option value="0">SELECCIONES UNA OPCIÓN</option>

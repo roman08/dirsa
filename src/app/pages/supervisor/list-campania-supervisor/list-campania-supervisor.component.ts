@@ -16,7 +16,7 @@ export class ListCampaniaSupervisorComponent implements OnInit {
   constructor(
     private _srvCampania: CampaniasService,
     public _srvStorage: StorageService,
-    
+    private router: Router
   ) {
     this.user_name = JSON.parse(this._srvStorage.get('user_name'));
   }
@@ -27,5 +27,9 @@ export class ListCampaniaSupervisorComponent implements OnInit {
     });
   }
 
-
+  showDetail(id_campania: number, id_type_origin: number) {
+    // /dashboard/aaacimnp - detail;
+    this._srvStorage.set('id_type_origin', id_type_origin);
+    this.router.navigate(['/dashboard/campania-detail', id_campania]);
+  }
 }

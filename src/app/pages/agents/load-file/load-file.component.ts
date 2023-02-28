@@ -7,6 +7,7 @@ import swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 import { Campania } from 'src/app/models/campania.model';
 import { CampaniasService } from 'src/app/services/campanias.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-load-file',
@@ -23,18 +24,25 @@ export class LoadFileComponent implements OnInit {
   dataString: string | undefined;
 
   campanias: Campania[] = [];
+  id_type_origin: any;
+  user_id: number = 0;
 
   constructor(
     private _srvAgents: AgentsService,
     private formBuilder: FormBuilder,
-    private _srvCampania: CampaniasService
-  ) {}
+    private _srvCampania: CampaniasService,
+    private _srvStorage: StorageService
+  ) {
+    this.id_type_origin = JSON.parse(this._srvStorage.get('id_type_origin'));
+    this.user_id = JSON.parse(this._srvStorage.get('user_id'));
+  }
 
   ngOnInit(): void {
     this.loadCampanias();
     this.fileUploadForm = this.formBuilder.group({
       myfile: [''],
       fuente: [1],
+      day_register: [],
     });
   }
 
@@ -44,7 +52,6 @@ export class LoadFileComponent implements OnInit {
     });
   }
   onFileSelect(ev: any) {
-    console.log(ev.target);
 
     let workBook: XLSX.WorkBook;
     let jsonData = null;
@@ -72,7 +79,7 @@ export class LoadFileComponent implements OnInit {
     // }
 
     const fuente = this.fileUploadForm.controls['fuente'].value;
-
+    const fecha = this.fileUploadForm.controls['day_register'].value;
     const formData = new FormData();
 
     formData.append(
@@ -82,8 +89,10 @@ export class LoadFileComponent implements OnInit {
 
     const body = {
       data: this.dataString,
-      user_id: 1,
-      tipo_fuente: fuente,
+      user_id: this.user_id,
+      tipo_fuente: this.id_type_origin,
+      id_campania: fuente,
+      day_register: fecha,
     };
 
     // let payload = JSON.stringify({
