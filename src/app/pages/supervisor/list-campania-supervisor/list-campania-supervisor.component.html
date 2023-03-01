@@ -26,7 +26,7 @@
                                 <td><span class="label  label-rounded" [ngClass]="{'label-success': campania.estatus === 'Activo', 'label-danger' : campania.estatus === 'Inactivo' }"></span></td> 
                                 <td><a href="#">4</a></td>
                                 <td class="actions">
-                                    <a (click)="showDetail(campania.id, campania.id_type_origin)"><i class="mdi mdi-eye"></i></a>
+                                    <a style="cursor: pointer;" (click)="showDetail(campania.id, campania.id_type_origin)"><i class="mdi mdi-eye"></i></a>
                                 </td>
                             </tr>
                         </tbody>

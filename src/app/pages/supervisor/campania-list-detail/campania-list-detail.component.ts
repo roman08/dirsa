@@ -31,9 +31,28 @@ export class CampaniaListDetailComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getCampaniaDetail(id: string | null, id_type_origin: any, id_campania: string | null) {
+  getCampaniaDetail(
+    id: string | null,
+    id_type_origin: any,
+    id_campania: string | null
+  ) {
+
+    const firstDay = this.getFirtsDayMounthActuality();
+    const lastDay = this.getLastDayMounthActuality();
+    const mountActuality = this.getMouthActuality();
+    console.log(firstDay);
+    console.log(lastDay);
+    console.log(mountActuality);
+    
     this._srvCampania
-      .getCampaniaDetail(id, id_type_origin, id_campania)
+      .getCampaniaDetail(
+        id,
+        id_type_origin,
+        id_campania,
+        firstDay,
+        lastDay,
+        mountActuality
+      )
       .subscribe((res) => {
         if (res.status == 'success') {
           this.details = [];
@@ -45,12 +64,56 @@ export class CampaniaListDetailComponent implements OnInit {
           const hrs_jornada = configuracion.hrs_jornada;
           this.horas_meta = this.num_agents * hrs_jornada;
 
-          console.log();
         }
       });
   }
 
   loadFile() {
     this.router.navigateByUrl('/dashboard/load-file');
+  }
+
+  getFirtsDayMounthActuality() {
+    const fechaActual = new Date();
+    const primerDiaMes = new Date(
+      fechaActual.getFullYear(),
+      fechaActual.getMonth(),
+      1
+    );
+
+
+    const dia = primerDiaMes.getDate().toString().padStart(2, '0');
+    const mes = (primerDiaMes.getMonth() + 1).toString().padStart(2, '0');
+    const anio = primerDiaMes.getFullYear().toString();
+    return `${anio}-${mes}-${dia}`;
+
+   
+  }
+
+  getLastDayMounthActuality() {
+    const fechaActual = new Date();
+
+    const ultimoDiaMes = new Date(
+      fechaActual.getFullYear(),
+      fechaActual.getMonth() + 1,
+      0
+    );
+
+    const diaF = ultimoDiaMes.getDate().toString().padStart(2, '0');
+    const mesF = (ultimoDiaMes.getMonth() + 1).toString().padStart(2, '0');
+    const anioF = ultimoDiaMes.getFullYear().toString();
+    return `${anioF}-${mesF}-${diaF}`;
+  }
+
+  getMouthActuality(){
+      const fechaActual = new Date();
+
+      const mesActual = new Date(
+        fechaActual.getFullYear(),
+        fechaActual.getMonth() + 1,
+        1
+      );
+      
+      const mes = (mesActual.getMonth() ).toString().padStart(2, '0');
+      return parseInt(mes);
   }
 }

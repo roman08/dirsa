@@ -125,11 +125,14 @@ export class CampaniasService {
   getCampaniaDetail(
     id_usuario_registro: string | null,
     id_type_origin: any,
-    id_campania: string | null
+    id_campania: string | null,
+    firstDay: string,
+    lastDay: string,
+    mountActuality: number
   ): Observable<any> {
     const URL =
       this.baseUrl +
-      `campanias/getCampaniaAgent?id_usuario_registro=${id_usuario_registro}&id_type_origin=${id_type_origin}&id_campania=${id_campania}`;
+      `campanias/getCampaniaAgent?id_usuario_registro=${id_usuario_registro}&id_type_origin=${id_type_origin}&id_campania=${id_campania}&firstDay=${firstDay}&lastDay=${lastDay}&mountActuality=${mountActuality}`;
     const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
 
     const headers = new HttpHeaders()
