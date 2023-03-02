@@ -23,12 +23,17 @@ export class ListCampaniaSupervisorComponent implements OnInit {
 
   ngOnInit(): void {
     this._srvCampania.getAgentCampanias().subscribe((res) => {
-      this.campanias = res['data'];
+      console.log(res);
+      
+      if (res.status == 'success') {
+        this.campanias = res['data'];
+      }
     });
   }
 
   showDetail(id_campania: number, id_type_origin: number) {
     // /dashboard/aaacimnp - detail;
+
     this._srvStorage.set('id_type_origin', id_type_origin);
     this.router.navigate(['/dashboard/campania-detail', id_campania]);
   }

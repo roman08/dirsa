@@ -84,8 +84,13 @@ export class CampaniaCreateComponent implements OnInit {
     this._srvCampanias.createCampania(body).subscribe((res) => {
       console.log(res);
       if (res.status == 'success') {
+        const id_campania = res.data;
+
+
         swal.fire('Alerta', res.message, 'success');
-        this.router.navigateByUrl('/dashboard/listado-campanias');
+
+        this.router.navigate(['/dashboard/add-month-campania', id_campania]);
+        // this.router.navigateByUrl('/dashboard/listado-campanias');
         // /dashboard/adilost - camapnias;
       }
     });
