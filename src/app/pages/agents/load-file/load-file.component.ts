@@ -67,7 +67,6 @@ export class LoadFileComponent implements OnInit {
         return initial;
       }, {});
       this.dataString = JSON.stringify(jsonData);
-      console.log('load');
     };
     reader.readAsBinaryString(file);
   }
@@ -102,7 +101,6 @@ export class LoadFileComponent implements OnInit {
     // formData.append('payload', payload);
 
     this._srvAgents.upload(body).subscribe((event: HttpEvent<any>) => {
-      console.log(event);
 
       switch (event.type) {
         case HttpEventType.Sent:

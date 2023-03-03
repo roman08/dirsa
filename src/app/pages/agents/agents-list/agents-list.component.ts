@@ -26,12 +26,10 @@ export class AgentsListComponent implements OnInit {
       this.agents = data['data'];
       this.total = data['total'];
       this.p = data['current_page'];
-      console.log(res);
     });
   }
 
   pageChange(newPage: number) {
-    console.log(newPage);
     this.loading = true;
     this._srvAgents.getAgentesPaginate(newPage).subscribe((res) => {
       const data = res['data'];
@@ -40,7 +38,6 @@ export class AgentsListComponent implements OnInit {
       this.total = data['total'];
       this.p = data['current_page'];
       this.loading = false;
-      console.log(res);
     });
     // this.router.navigate([''], { queryParams: { page: newPage } });
   }

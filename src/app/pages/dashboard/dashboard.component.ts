@@ -87,7 +87,6 @@ export class DashboardComponent implements OnInit {
     event?: ChartEvent;
     active?: {}[];
   }): void {
-    console.log(event, active);
   }
 
   public chartHovered({
@@ -97,6 +96,5 @@ export class DashboardComponent implements OnInit {
     event?: ChartEvent;
     active?: {}[];
   }): void {
-    console.log(event, active);
   }
 }

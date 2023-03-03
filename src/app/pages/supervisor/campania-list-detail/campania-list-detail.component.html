@@ -28,7 +28,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <h3>Agentes en riesgo <a href="http://" class="agentes-riesgo">{{totalAgentsDanger}}</a></h3>
+                        <h3>Agentes en riesgo <a (click)="showAgents()" class="agentes-riesgo" style="cursor: pointer; color: red; text-decoration: underline;">{{totalAgentsDanger}}</a></h3>
                     </div>
                     <div class="col-6">
                         <h4 class="card-title" style="text-align: end;"><button class="btn btn-primary" (click)="loadFile()" value=""><i

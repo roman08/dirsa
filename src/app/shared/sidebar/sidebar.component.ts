@@ -27,14 +27,12 @@ export class SidebarComponent implements OnInit {
     this.menuItems = sidebarService.menu;
     this.nameUser = JSON.parse(this._srvStorage.get('user_name'));
     const imgProfile = this._srvStorage.get('img_profile');
-    console.log(imgProfile);
     
     this.imgProfile = (imgProfile == "")
       ? JSON.parse(imgProfile)
       : 'https://www.fgjcdmx.gob.mx/themes/base/assets/images/def-user.png';
 
 
-      console.log(this.imgProfile);
     this.email = JSON.parse(this._srvStorage.get('email'));
   }
 

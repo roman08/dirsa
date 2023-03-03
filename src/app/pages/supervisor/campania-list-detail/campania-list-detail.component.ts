@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CampaniaDetail } from 'src/app/models/campaniaDetail.model';
 import { CampaniasService } from 'src/app/services/campanias.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { UtilitiesService } from 'src/app/services/utilities.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -20,12 +21,14 @@ export class CampaniaListDetailComponent implements OnInit {
   starDate: any;
   endDate: any;
   validDate: boolean = true;
-  totalAgentsDanger!: number;
+  totalAgentsDanger: number = 0;
+  agentsDanger: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private _srvCampania: CampaniasService,
     private router: Router,
-    private _srvStorage: StorageService
+    private _srvStorage: StorageService,
+    private _srvUtilities: UtilitiesService
   ) {
     this.id_type_origin = JSON.parse(this._srvStorage.get('id_type_origin'));
     this.id_campania = this.route.snapshot.paramMap.get('id');
@@ -40,14 +43,26 @@ export class CampaniaListDetailComponent implements OnInit {
     const lastDay = this.getLastDayMounthActuality();
     const fechaActual = new Date();
     const mountActuality = this.getMouthActuality(fechaActual);
+    const dayDifference = this._srvUtilities.getDayDifference(
+      firstDay,
+      fechaActual
+    );
 
     this._srvCampania
       .getAgentsDanger(firstDay, lastDay, this.id_campania)
       .subscribe((res) => {
-        this.totalAgentsDanger = res.data.length;
-        console.log(res.data.length);
+        const agents = res.data;
+
+        for (let agent of agents) {
+
+          if (agent.total_days >= 3) {
+            this.agentsDanger.push(agent);
+            this.totalAgentsDanger++;
+          }
+        }
+
       });
-    
+
     this._srvCampania
       .getCampaniaDetail(
         this.id_user,
@@ -107,8 +122,6 @@ export class CampaniaListDetailComponent implements OnInit {
   }
 
   getMouthActuality(date: Date) {
-    console.log(date);
-
     const mesActual = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
     const mes = mesActual.getMonth().toString().padStart(2, '0');
@@ -148,17 +161,19 @@ export class CampaniaListDetailComponent implements OnInit {
     this.validDate = false;
   }
 
-  selectEndDate(){
+  selectEndDate() {
     const starDate = new Date(this.starDate);
-        const endDate = new Date(this.endDate);
+    const endDate = new Date(this.endDate);
 
-    if( this.getMouthActuality(starDate)  == this.getMouthActuality(endDate)) {
+    if (this.getMouthActuality(starDate) == this.getMouthActuality(endDate)) {
       console.log('mismo mes');
-      
-    }else{
+    } else {
       console.log('meses diferentes');
-      
     }
+  }
 
+  showAgents(){
+    console.log(this.agentsDanger);
+    
   }
 }

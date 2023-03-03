@@ -67,7 +67,6 @@ export class CampaniaEditComponent implements OnInit {
     this._srvCampania.geyById(id).subscribe((res) => {
       if (res.status == 'success') {
         const data = res.data;
-        console.log(data);
 
         this.liderModel = data.leaders[0].id;
         this.grupoModel = data.groups[0].id;
@@ -97,10 +96,8 @@ export class CampaniaEditComponent implements OnInit {
       id: this.id_campania
     };
 
-    console.log(body);
     
     this._srvCampania.update(body).subscribe((res) => {
-      console.log(res);
       if (res.status == 'success') {
         swal.fire('Alerta', res.message, 'success');
         this.router.navigateByUrl('/dashboard/listado-campanias');

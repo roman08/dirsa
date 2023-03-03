@@ -23,7 +23,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Mes a registrar</label>
-                                <select class="form-control custom-select" formControlName="month">
+                                <select class="form-control custom-select" formControlName="month" (change)="selecMounth($event.target)" [(ngModel)]="month">
+
+                                    <option value="">Seleccione un mes</option>
                                     <option value="1">Enero</option>
                                     <option value="2">Febrero</option>
                                     <option value="3">Marzo</option>
@@ -104,7 +106,7 @@
                     <div mat-dialog-actions class="btn-create">
                         <a routerLink="/dashboard/listado-campanias" class="btn btn-warning">
                             Cancelar</a>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="monthForm.invalid">Guardar</button>
                     </div>
                 </form>
 

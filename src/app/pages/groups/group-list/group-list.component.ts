@@ -27,7 +27,6 @@ export class GroupListComponent implements OnInit {
     this._srvGroup.getGroups().subscribe((res) => {
       this.groups = [];
       this.groups = res['data'];
-      console.log(this.groups);
     });
   }
 

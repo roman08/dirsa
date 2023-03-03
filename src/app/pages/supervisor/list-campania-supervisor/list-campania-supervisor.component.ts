@@ -23,7 +23,6 @@ export class ListCampaniaSupervisorComponent implements OnInit {
 
   ngOnInit(): void {
     this._srvCampania.getAgentCampanias().subscribe((res) => {
-      console.log(res);
       
       if (res.status == 'success') {
         this.campanias = res['data'];

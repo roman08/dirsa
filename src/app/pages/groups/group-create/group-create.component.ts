@@ -52,7 +52,6 @@ export class GroupCreateComponent implements OnInit {
     this._srvGroup
       .createGroup(nombre, 'Activo', agents, idTypeAgent)
       .subscribe((res) => {
-        console.log(res);
         swal.fire('Alerta', res.message, 'success');
         this.router.navigateByUrl('/dashboard/listado-grupos');
       });
@@ -68,7 +67,6 @@ export class GroupCreateComponent implements OnInit {
         agent.nombre_completo = a.nombre_completo;
         agent.numero_empleado = a.numero_empleado;
         this.agents.push(agent);
-        console.log(this.agents);
         
       }
     });

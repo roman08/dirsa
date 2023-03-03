@@ -43,7 +43,6 @@ export class GroupEditComponent implements OnInit {
 
   getGroup(id: number) {
     this._srvGroup.get(id).subscribe((res) => {
-      console.log(res);
       this.nombreModel = res.data.nombre;
       this.idTypeAgent = res.data.id_tipo_agente;
       
@@ -86,7 +85,6 @@ export class GroupEditComponent implements OnInit {
     this._srvGroup
       .update(nombre, 'Activo', agents, idTypeAgent, this.id_grupo)
       .subscribe((res) => {
-        console.log(res);
         swal.fire('Alerta', res.message, 'success');
         this.router.navigateByUrl('/dashboard/listado-grupos');
       });

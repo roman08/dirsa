@@ -9,13 +9,33 @@ import { CampaniasService } from 'src/app/services/campanias.service';
 })
 export class DashboardAdminComponent implements OnInit {
   campanias: HoursAdmin[] = [];
+  mounth!: number;
   constructor(private _srvCampanias: CampaniasService) {}
 
   ngOnInit(): void {
-    this._srvCampanias.getCampaniasAdmin().subscribe((res) => {
+    const mountActuality = this.getMouthActuality();
+    this.getHours(mountActuality);
+  }
+
+  getHours(mounth: number) {
+    this._srvCampanias.getCampaniasAdmin(mounth).subscribe((res) => {
+      this.campanias = [];
       this.campanias = res.data;
 
-      console.log(this.campanias);
     });
+  }
+
+  searhcHours(){
+    this.getHours(this.mounth);
+  }
+  getMouthActuality() {
+    const fechaActual = new Date();
+    const mesActual = fechaActual.getMonth() + 1; // devuelve un número entre 0 y 11
+
+    // const nombreMesActual = fechaActual.toLocaleString('default', {
+    //   month: 'long',
+    // });
+    this.mounth = mesActual;
+    return mesActual;
   }
 }

@@ -23,9 +23,8 @@ export class CampaniasService {
     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
   }
 
-  getCampaniasAdmin(): Observable<any> {
-    // const URL = this.baseUrl + 'campanias/getCampaaniasAdmin';
-    const URL = this.baseUrl + 'campanias/getHoursAdmin';
+  getCampaniasAdmin(mounth: number): Observable<any> {
+    const URL = this.baseUrl + `campanias/getHoursAdmin?mounth=${mounth}`;
     const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
 
     const headers = new HttpHeaders()
