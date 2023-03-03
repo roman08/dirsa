@@ -20,7 +20,7 @@ export class CampaniaListDetailComponent implements OnInit {
   starDate: any;
   endDate: any;
   validDate: boolean = true;
-
+  totalAgentsDanger!: number;
   constructor(
     private route: ActivatedRoute,
     private _srvCampania: CampaniasService,
@@ -41,6 +41,13 @@ export class CampaniaListDetailComponent implements OnInit {
     const fechaActual = new Date();
     const mountActuality = this.getMouthActuality(fechaActual);
 
+    this._srvCampania
+      .getAgentsDanger(firstDay, lastDay, this.id_campania)
+      .subscribe((res) => {
+        this.totalAgentsDanger = res.data.length;
+        console.log(res.data.length);
+      });
+    
     this._srvCampania
       .getCampaniaDetail(
         this.id_user,
@@ -109,7 +116,6 @@ export class CampaniaListDetailComponent implements OnInit {
   }
 
   search() {
-    console.log(this.starDate);
     const starDate = new Date(this.starDate);
     const mountActuality = this.getMouthActuality(starDate);
 

@@ -24,7 +24,8 @@ export class CampaniasService {
   }
 
   getCampaniasAdmin(): Observable<any> {
-    const URL = this.baseUrl + 'campanias/getCampaaniasAdmin';
+    // const URL = this.baseUrl + 'campanias/getCampaaniasAdmin';
+    const URL = this.baseUrl + 'campanias/getHoursAdmin';
     const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
 
     const headers = new HttpHeaders()
@@ -34,6 +35,23 @@ export class CampaniasService {
     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
   }
 
+  getAgentsDanger(
+    firstDay: string,
+    lastDay: string,
+    id_campania: string | null
+  ): Observable<any> {
+    // const URL = this.baseUrl + 'campanias/getCampaaniasAdmin';
+    const URL =
+      this.baseUrl +
+      `campanias/getAgentsDanger?firstDay=${firstDay}&lastDay=${lastDay}&id_campania=1`;
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
+
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
   createCampania(data: {
     nombre: any;
     fecha_creacion: any;

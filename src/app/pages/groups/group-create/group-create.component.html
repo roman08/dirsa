@@ -32,7 +32,7 @@
                                     [(ngModel)]="agent.isChecked" (change)="changeSelection()"
                                     value="{{agent.nombre_completo}}" [ngModelOptions]="{standalone: true}">
                                 <label class="form-check-label" for="checkbox{{agent.id}}">
-                                    {{ agent.nombre_completo }}
+                                    {{ agent.nombre_completo }} - <span style="color: red;">{{ agent.numero_empleado }}</span>
                                 </label>
                             </div>
 

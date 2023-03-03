@@ -23,9 +23,12 @@ export class GroupShowComponent implements OnInit {
     this._srvGroup.get(id).subscribe((res) => {
       const agentsGroup = res.data.agentes;
 
+      console.log(agentsGroup);
+      
       for (let a of agentsGroup) {
         let agent = new Agent();
         agent.id = a.id;
+        agent.numero_empleado = a.numero_empleado;
         agent.nombre_completo = a.nombre_completo;
         this.agentsGroup.push(agent);
       }

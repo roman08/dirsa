@@ -12,25 +12,23 @@
                                 <th>Fecha de creación</th>
                                 <th>Campaña</th>
                                 <th>Total de agentes</th>
-                                <th>Agentes en riego de baja</th>
                                 <th>Horas meta</th>
                                 <th>Horas sistema</th>
                                 <th>Diferencia</th>
-                                <th>Semnaforo</th>
+                                <th>Semaforo</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- TODO : LISTADO CAMAPAÑAS -->
                             <tr *ngFor="let campania of campanias">
-                                <td>{{campania.id }}</td>
+                                <td>{{campania.id_campania }}</td>
                                 <td>{{campania.fecha_creacion }}</td>
                                 <td>{{campania.nombre }}</td>
-                                <td>50</td>
-                                <td><a href="#">2</a></td>
+                                <td>{{campania.tot_agents}}</td>
                                 <td>1800</td>
-                                <td>1700</td>
+                                <td>{{campania.hrs_campania}}</td>
                                 <td> 0%</td>
-                                <td>verde</td>
+                                <td><span class="label  label-rounded label-success">{{ campania.estatus}}</span></td>
                             </tr>
 
 

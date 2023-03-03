@@ -26,8 +26,15 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title" style="text-align: end;"><button class="btn btn-primary" (click)="loadFile()"
-                        value=""><i class="mdi mdi-plus"></i> Cargar archivo</button></h4>
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Agentes en riesgo <a href="http://" class="agentes-riesgo">{{totalAgentsDanger}}</a></h3>
+                    </div>
+                    <div class="col-6">
+                        <h4 class="card-title" style="text-align: end;"><button class="btn btn-primary" (click)="loadFile()" value=""><i
+                                    class="mdi mdi-plus"></i> Cargar archivo</button></h4>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>

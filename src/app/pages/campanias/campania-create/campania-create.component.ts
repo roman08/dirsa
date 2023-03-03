@@ -49,7 +49,7 @@ export class CampaniaCreateComponent implements OnInit {
       this.typePays = res.data;
     });
 
-    this._srvGroup.getGroups().subscribe((res) => {
+    this._srvGroup.getGroupFilter().subscribe((res) => {
       this.groups = res.data;
     });
 

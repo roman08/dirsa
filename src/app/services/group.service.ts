@@ -22,6 +22,17 @@ export class GroupService {
 
     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
   }
+
+  getGroupFilter(): Observable<any> {
+    const URL = this.baseUrl + 'getGroupFilter';
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
+
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
   createGroup(
     nombre: string,
     estatus: string,
@@ -82,7 +93,7 @@ export class GroupService {
       estatus: estatus,
       agents: agents,
       id_tipo_agente: idTypeAgent,
-      id: id
+      id: id,
     };
 
     return this.http.post(URL, body, { headers }).pipe(map((res) => res));

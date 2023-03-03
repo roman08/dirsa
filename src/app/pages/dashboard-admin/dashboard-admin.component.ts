@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Campania } from 'src/app/models/campania.model';
+import { HoursAdmin } from 'src/app/models/hoursAdmin.model';
 import { CampaniasService } from 'src/app/services/campanias.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { CampaniasService } from 'src/app/services/campanias.service';
   styleUrls: ['./dashboard-admin.component.css'],
 })
 export class DashboardAdminComponent implements OnInit {
-  campanias: Campania[] = [];
+  campanias: HoursAdmin[] = [];
   constructor(private _srvCampanias: CampaniasService) {}
 
   ngOnInit(): void {

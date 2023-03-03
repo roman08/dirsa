@@ -66,7 +66,10 @@ export class GroupCreateComponent implements OnInit {
         agent.id = a.id;
         agent.isChecked = false;
         agent.nombre_completo = a.nombre_completo;
+        agent.numero_empleado = a.numero_empleado;
         this.agents.push(agent);
+        console.log(this.agents);
+        
       }
     });
   }
