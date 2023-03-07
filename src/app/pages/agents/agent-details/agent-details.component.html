@@ -2,9 +2,11 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                
-
                 <div class="table-responsive">
+                    <h4 style="text-align: end;">
+                        <a routerLink="/dashboard/agents" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i> Regresar</a>
+
+                    </h4>
                     <table class="table">
                         <thead>
                             <tr>
@@ -13,28 +15,21 @@
                                 <th>Email</th>
                                 <th>Móvil</th>
                                 <th>Campaña</th>
-                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- TODO : LISTADO CAMAPAÑAS -->
-                            <tr *ngFor="let agent of agents  | paginate: { id: 'server', itemsPerPage: 10, currentPage: p, totalItems: total }">
-                                <td>{{ agent.numero_empleado }}</td>
-                                <td>{{ agent.nombre_completo }}</td>
-                                <td>{{ agent.email }}</td>
+                            <tr>
+                                <td>{{ agente.numero_empleado }}</td>
+                                <td>{{ agente.nombre_completo }}</td>
+                                <td>{{ agente.email }}</td>
                                 <td>----------</td>
-                                <td>{{ agent.campania}}</td>
-                                <td><a [routerLink]="['/dashboard/agente-detail', agent.id ]"><i class="mdi mdi-eye"></i></a></td>
+                                <td>{{ agente.campania}}</td>
+                               
                             </tr>
 
                         </tbody>
                     </table>
-                    <pagination-controls 
-                        (pageChange)="pageChange($event)" 
-                        id="server"
-                        previousLabel="Anterior"
-                        nextLabel="Siguiente">
-                    </pagination-controls>
                 </div>
             </div>
         </div>

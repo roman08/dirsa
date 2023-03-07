@@ -39,4 +39,20 @@ export class User {
   id_domicilo?: number;
   nota?: string;
   mes_baja?: string;
+  campania?: string;
+  campanias?: Campanias[];
+}
+
+
+
+export class Campanias {
+  id?: number;
+  nombre?: string;
+  estatus?: string;
+  created_at?: Date;
+  updated_at?: Date;
+  fecha_creacion?: Date;
+  bilingue?: number;
+  id_forma_de_pago?: number;
+  id_type_origin?: number;
 }

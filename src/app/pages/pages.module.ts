@@ -36,6 +36,7 @@ import { CampaniaEditComponent } from './campanias/campania-edit/campania-edit.c
 import { GroupEditComponent } from './groups/group-edit/group-edit.component';
 import { GroupShowComponent } from './groups/group-show/group-show.component';
 import { CampaniaListDetailComponent } from './supervisor/campania-list-detail/campania-list-detail.component';
+import { AgentDetailsComponent } from './agents/agent-details/agent-details.component';
 
 const materialModules = [
   MatButtonModule,
@@ -68,7 +69,8 @@ const materialModules = [
     CampaniaEditComponent,
     GroupEditComponent,
     GroupShowComponent,
-    CampaniaListDetailComponent
+    CampaniaListDetailComponent,
+    AgentDetailsComponent
   ],
   exports: [
     DashboardComponent,
