@@ -21,6 +21,7 @@ import { GroupEditComponent } from './groups/group-edit/group-edit.component';
 import { GroupShowComponent } from './groups/group-show/group-show.component';
 import { CampaniaListDetailComponent } from './supervisor/campania-list-detail/campania-list-detail.component';
 import { AgentDetailsComponent } from './agents/agent-details/agent-details.component';
+import { CampaniaListMonthsComponent } from './campanias/campania-list-months/campania-list-months.component';
 
 
 
@@ -135,6 +136,12 @@ const routes: Routes = [
         path: 'agente-detail/:id',
         component: AgentDetailsComponent,
         data: { titulo: 'Agentes / detalle agente' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'list-months/:id',
+        component: CampaniaListMonthsComponent,
+        data: { titulo: 'Campaña / listdo meses' },
         canActivate: [AccesoGuard],
       },
       //   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

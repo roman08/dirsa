@@ -8,6 +8,7 @@ import * as XLSX from 'xlsx';
 import { Campania } from 'src/app/models/campania.model';
 import { CampaniasService } from 'src/app/services/campanias.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-load-file',
@@ -15,6 +16,7 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./load-file.component.css'],
 })
 export class LoadFileComponent implements OnInit {
+  @ViewChild('donwload') donwload: any;
   @ViewChild('UploadFileInput', { static: false })
   uploadFileInput!: ElementRef;
   fileUploadForm!: FormGroup;
@@ -24,14 +26,17 @@ export class LoadFileComponent implements OnInit {
   dataString: string | undefined;
 
   campanias: Campania[] = [];
+  agentsDanger: any[] = [];
   id_type_origin: any;
   user_id: number = 0;
-
+  fileUrl!: SafeResourceUrl;
+  showBtnErrors:boolean = false;
   constructor(
     private _srvAgents: AgentsService,
     private formBuilder: FormBuilder,
     private _srvCampania: CampaniasService,
-    private _srvStorage: StorageService
+    private _srvStorage: StorageService,
+    private sanitizer: DomSanitizer
   ) {
     this.id_type_origin = JSON.parse(this._srvStorage.get('id_type_origin'));
     this.user_id = JSON.parse(this._srvStorage.get('user_id'));
@@ -52,7 +57,6 @@ export class LoadFileComponent implements OnInit {
     });
   }
   onFileSelect(ev: any) {
-
     let workBook: XLSX.WorkBook;
     let jsonData = null;
     const reader = new FileReader();
@@ -70,6 +74,8 @@ export class LoadFileComponent implements OnInit {
     };
     reader.readAsBinaryString(file);
   }
+
+  donwloadFile() {}
 
   onFormSubmit(): boolean {
     // if (!this.fileUploadForm.controls['myfile'].value) {
@@ -101,7 +107,6 @@ export class LoadFileComponent implements OnInit {
     // formData.append('payload', payload);
 
     this._srvAgents.upload(body).subscribe((event: HttpEvent<any>) => {
-
       switch (event.type) {
         case HttpEventType.Sent:
           console.log('Request has been made!');
@@ -116,8 +121,22 @@ export class LoadFileComponent implements OnInit {
           break;
         case HttpEventType.Response:
           console.log('User successfully created!', event.body);
+
           if (event.body.status == 'success') {
             setTimeout(() => {
+              if (event.body.userNoValid.length > 0) {
+                this.showBtnErrors = true;
+                //
+                this.agentsDanger = event.body.userNoValid;
+                let data = JSON.stringify(this.agentsDanger);
+                console.log(data);
+                const blob = new Blob([data], { type: 'application/json' });
+                this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+                  window.URL.createObjectURL(blob)
+                );
+
+                console.log(this.fileUrl);
+              }
               swal.fire('Do It Right', event.body.msg, 'success');
             }, 2000);
           } else {

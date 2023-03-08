@@ -2,9 +2,11 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <a routerLink="/dashboard/listado-campanias" class="btn btn-primary"><i
-                        class="mdi mdi-arrow-left-bold"></i>
-                    Regresar</a>
+                <h4 style="display: flex; gap: 15px; text-align: end;">
+                    <a *ngIf="showBtnErrors" [href]="fileUrl" download="registro_errores.txt" class="btn btn-danger">Descargar archivo de errores</a>
+                    <a routerLink="/dashboard/listado-campanias" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>
+                        Regresar</a>
+                </h4>
             </div>
         </div>
     </div>
@@ -17,6 +19,7 @@
                 <div class="card-body">
                     <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
                         <div class="row">
+                            
                             <div class="col-sm-4 text-center">
                                 <div class="form-group">
                                     <label class="control-label">Fuente de origen</label>

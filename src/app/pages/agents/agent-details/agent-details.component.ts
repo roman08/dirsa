@@ -18,7 +18,6 @@ export class AgentDetailsComponent implements OnInit {
       const data = res['data'];
       const agent = new User();
 
-      console.log(data.campanias[0].nombre);
 
       const nombre_campania =
         data.campanias.length > 0 ? data.campanias[0].nombre : '';
