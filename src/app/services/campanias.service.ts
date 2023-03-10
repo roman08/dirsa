@@ -37,7 +37,7 @@ export class CampaniasService {
   getAgentsDanger(
     firstDay: string,
     lastDay: string,
-    id_campania: string | null
+    id_campania: string | number | null | undefined
   ): Observable<any> {
     // const URL = this.baseUrl + 'campanias/getCampaaniasAdmin';
     const URL =
@@ -159,9 +159,32 @@ export class CampaniasService {
     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
   }
 
-  getMonthsCampania(
-    id: string | null ): Observable<any> {
+  getMonthsCampania(id: string | null): Observable<any> {
     const URL = this.baseUrl + `campanias/getMonthsCampania?id=${id}`;
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
+
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
+
+  getHoursSupervisor(mounth: number, id: number): Observable<any> {
+    const URL =
+      this.baseUrl + `campanias/getHoursSupervisor?mounth=${mounth}&id=${id}`;
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
+
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
+
+  getMonthCampania(mounth: number, id: number | undefined): Observable<any> {
+    const URL =
+      this.baseUrl + `campanias/getMonthCampania?month=${mounth}&id=${id}`;
     const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
 
     const headers = new HttpHeaders()

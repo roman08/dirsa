@@ -49,7 +49,10 @@ export class GroupEditComponent implements OnInit {
       const agentsGroup = res.data.agentes;
       
 
+      
+      
        for (let a of agentsGroup) {
+
          let agent = new Agent();
          agent.id = a.id;
          agent.nombre_completo = a.nombre_completo;
@@ -103,10 +106,13 @@ export class GroupEditComponent implements OnInit {
          agent.isChecked = filteredProducts.length > 0 ? true : false;
         // agent.isChecked = false;
         agent.nombre_completo = a.nombre_completo;
+        agent.numero_empleado = a.numero_empleado;
         this.agents.push(agent);
 
 
       }
+
+      console.log(this.agents);
       
     });
   }
