@@ -19,8 +19,9 @@ export class DashboardComponent implements OnInit {
   agentsDanger: any[] = [];
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
+      // horas metas configuracion mes
       {
-        data: [35, 49, 50, 21, 56, 55, 40],
+        data: [0, 35, 5],
         label: 'Horas meta',
         backgroundColor: 'rgba(148,159,177,0.2)',
         borderColor: 'rgba(148,159,177,1)',
@@ -30,8 +31,9 @@ export class DashboardComponent implements OnInit {
         pointHoverBorderColor: 'rgba(148,159,177,0.8)',
         fill: 'origin',
       },
+      // horas metas horas agente mes
       {
-        data: [28, 48, 40, 19, 36, 27, 50],
+        data: [0, 28, 6],
         label: 'Horas reales',
         backgroundColor: 'rgba(255,0,0,0.3)',
         borderColor: 'red',
@@ -44,12 +46,12 @@ export class DashboardComponent implements OnInit {
     ],
     labels: [
       '1 enero',
-      '2 enero',
-      '3 enero',
-      '4 enero',
-      '5 enero',
-      '6 enero',
-      '7 enero',
+      '2 febrero',
+      '3 marzo',
+      '4 abril',
+      '5 mayo',
+      '6 junio',
+      '7 julio',
     ],
   };
 
