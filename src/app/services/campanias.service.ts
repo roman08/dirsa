@@ -193,4 +193,15 @@ export class CampaniasService {
 
     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
   }
+
+  getDataGrafica(id: number | undefined): Observable<any> {
+     const URL = this.baseUrl + `campanias/getDataGrafica?id=${id}`;
+     const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+     const headers = new HttpHeaders()
+       .set('Accept', 'application/json')
+       .set('Authorization', token);
+
+     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
 }

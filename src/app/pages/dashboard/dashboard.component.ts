@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     datasets: [
       // horas metas configuracion mes
       {
-        data: [0, 35, 5],
+        data: [4800, 8500, 4000],
         label: 'Horas meta',
         backgroundColor: 'rgba(148,159,177,0.2)',
         borderColor: 'rgba(148,159,177,1)',
@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
       },
       // horas metas horas agente mes
       {
-        data: [0, 28, 6],
+        data: [13, 28, 6],
         label: 'Horas reales',
         backgroundColor: 'rgba(255,0,0,0.3)',
         borderColor: 'red',
@@ -99,6 +99,7 @@ export class DashboardComponent implements OnInit {
       this.hours = new HoursAdmin();
       this.hours = res.data[0];
       this.getMonth(month, this.hours.id_campania);
+      this.getDataGrafica(this.hours.id_campania);
     });
   }
 
@@ -107,8 +108,16 @@ export class DashboardComponent implements OnInit {
       this.month = new Month();
       this.month = res.data[0];
     });
+
+  
   }
 
+  getDataGrafica(id: number | undefined){
+    this._srvCampania.getDataGrafica(id).subscribe(res => {
+      console.log(res);
+      
+    });
+  }
   getAgentsDanger() {
     const firstDay = this.getFirtsDayMounthActuality();
     const lastDay = this.getLastDayMounthActuality();
