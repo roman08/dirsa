@@ -22,6 +22,8 @@ import { GroupShowComponent } from './groups/group-show/group-show.component';
 import { CampaniaListDetailComponent } from './supervisor/campania-list-detail/campania-list-detail.component';
 import { AgentDetailsComponent } from './agents/agent-details/agent-details.component';
 import { CampaniaListMonthsComponent } from './campanias/campania-list-months/campania-list-months.component';
+import { ShowListAgentsDayComponent } from './supervisor/show-list-agents-day/show-list-agents-day.component';
+import { ShowListAgentsDangerComponent } from './supervisor/show-list-agents-danger/show-list-agents-danger.component';
 
 
 
@@ -141,7 +143,19 @@ const routes: Routes = [
       {
         path: 'list-months/:id',
         component: CampaniaListMonthsComponent,
-        data: { titulo: 'Campaña / listdo meses' },
+        data: { titulo: 'Campaña / listado meses' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'list-agents/:id',
+        component: ShowListAgentsDayComponent,
+        data: { titulo: 'Agentes / listado día' },
+        canActivate: [AccesoGuard],
+      },
+      {
+        path: 'list-agents-danger',
+        component: ShowListAgentsDangerComponent,
+        data: { titulo: 'Agentes / en riesgo' },
         canActivate: [AccesoGuard],
       },
       //   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

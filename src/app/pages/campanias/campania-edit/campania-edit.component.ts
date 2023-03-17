@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group, Leader, TypePay } from 'src/app/models/campania.model';
+import { Origin } from 'src/app/models/origin.model';
 import { CampaniasService } from 'src/app/services/campanias.service';
 import { GeneralService } from 'src/app/services/general.service';
 import { GroupService } from 'src/app/services/group.service';
@@ -20,6 +21,7 @@ export class CampaniaEditComponent implements OnInit {
   typePays: TypePay[] = [];
   leaders: Leader[] = [];
   groups: Group[] = [];
+  origins: Origin[] = [];
   typeCampania: any;
 
   typeModel: number = 0;
@@ -27,6 +29,7 @@ export class CampaniaEditComponent implements OnInit {
   grupoModel: number = 0;
   nameModel: string = '';
   fInicioModel: string = '';
+  originData: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +46,7 @@ export class CampaniaEditComponent implements OnInit {
       group: new FormControl(''),
       leader: new FormControl(''),
       type: new FormControl(''),
+      origin: new FormControl(''),
     });
   }
 
@@ -60,6 +64,9 @@ export class CampaniaEditComponent implements OnInit {
       this.leaders = res.data;
     });
 
+    this._srvGeneral.getOrigins().subscribe((res) => {
+      this.origins = res.data;
+    });
     this.getCampania(this.id_campania);
   }
 
@@ -67,6 +74,8 @@ export class CampaniaEditComponent implements OnInit {
     this._srvCampania.geyById(id).subscribe((res) => {
       if (res.status == 'success') {
         const data = res.data;
+        console.log(data);
+        
 
         this.liderModel = data.leaders[0].id;
         this.grupoModel = data.groups[0].id;
@@ -74,6 +83,7 @@ export class CampaniaEditComponent implements OnInit {
         this.nameModel = data.nombre;
         this.fInicioModel = data.fecha_creacion;
         this.typeCampania = data.bilingue;
+        this.originData = data.id_type_origin;
       }
     });
   }
@@ -85,7 +95,8 @@ export class CampaniaEditComponent implements OnInit {
     const id_grupo = this.campaniaForm.value['group'];
     const id_supervisor = this.campaniaForm.value['leader'];
     const bilingue = this.campaniaForm.value['type'];
-
+    const originData = this.campaniaForm.value['origin'];
+    
     const body = {
       nombre: nombre,
       fecha_creacion: fecha_creacion,
@@ -93,10 +104,10 @@ export class CampaniaEditComponent implements OnInit {
       id_forma_de_pago: id_forma_de_pago,
       id_supervisor: id_supervisor,
       id_grupo: id_grupo,
-      id: this.id_campania
+      id: this.id_campania,
+      id_type_origin: originData
     };
 
-    
     this._srvCampania.update(body).subscribe((res) => {
       if (res.status == 'success') {
         swal.fire('Alerta', res.message, 'success');

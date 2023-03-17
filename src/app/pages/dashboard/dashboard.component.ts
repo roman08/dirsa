@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { DataGrafica } from 'src/app/models/dataGrafica.model';
 import { HoursAdmin } from 'src/app/models/hoursAdmin.model';
 import { CampaniasService } from 'src/app/services/campanias.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -17,71 +18,24 @@ export class DashboardComponent implements OnInit {
   mounth!: number;
   totalAgentsDanger: number = 0;
   agentsDanger: any[] = [];
-  public lineChartData: ChartConfiguration['data'] = {
-    datasets: [
-      // horas metas configuracion mes
-      {
-        data: [4800, 8500, 4000],
-        label: 'Horas meta',
-        backgroundColor: 'rgba(148,159,177,0.2)',
-        borderColor: 'rgba(148,159,177,1)',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-        fill: 'origin',
-      },
-      // horas metas horas agente mes
-      {
-        data: [13, 28, 6],
-        label: 'Horas reales',
-        backgroundColor: 'rgba(255,0,0,0.3)',
-        borderColor: 'red',
-        pointBackgroundColor: 'rgba(148,159,177,1)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-        fill: 'origin',
-      },
-    ],
-    labels: [
-      '1 enero',
-      '2 febrero',
-      '3 marzo',
-      '4 abril',
-      '5 mayo',
-      '6 junio',
-      '7 julio',
-    ],
-  };
-
-  public lineChartOptions: ChartConfiguration['options'] = {
-    elements: {
-      line: {
-        tension: 0.5,
-      },
-    },
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      y: {
-        position: 'left',
-      },
-      y1: {
-        position: 'right',
-        grid: {
-          color: 'rgba(255,0,0,0.3)',
-        },
-        ticks: {
-          color: 'red',
-        },
-      },
-    },
-  };
-
-  public lineChartType: ChartType = 'line';
+  data: DataGrafica[] = [];
 
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   user_id: any;
+
+  // TODO : DATOS GRAFICA
+  // lineChart
+  lineChartType: ChartType = 'line';
+  lineChartData: Array<any> = [];
+
+  lineChartLabels: Array<any> = [];
+
+ 
+  lineChartLegend: boolean = true;
+
+  public lineChartOptions: any = {
+    responsive: true,
+  };
 
   constructor(
     private _srvCampania: CampaniasService,
@@ -92,6 +46,7 @@ export class DashboardComponent implements OnInit {
     this.user_id = JSON.parse(this._srvStorage.get('user_id'));
     const mountActuality = this.getMouthActuality();
     this.getHours(mountActuality, this.user_id);
+
   }
 
   getHours(month: number, idUser: number) {
@@ -108,14 +63,31 @@ export class DashboardComponent implements OnInit {
       this.month = new Month();
       this.month = res.data[0];
     });
-
-  
   }
 
-  getDataGrafica(id: number | undefined){
-    this._srvCampania.getDataGrafica(id).subscribe(res => {
-      console.log(res);
+  getDataGrafica(id: number | undefined) {
+    this._srvCampania.getDataGrafica(id).subscribe((res) => {
+      this.data = res.data;
+
+      let horasTotal = [];
+      let horasSistema  = [];
+      let meses = [];
+      for(let h of this.data){
+        console.log(h);
+        horasTotal.push(h.total_horas);
+        horasSistema.push(h.hr_num);
+        const nMes = Number(h.month_campania);
+        meses.push(this.obtenerNombreMes(nMes));
+      }
       
+      this.lineChartLabels = meses;
+
+
+
+      this.lineChartData = [
+        { data: horasTotal, label: 'Horas meta' },
+        { data: horasSistema, label: 'Horas sistema' },
+      ];
     });
   }
   getAgentsDanger() {
@@ -195,4 +167,15 @@ export class DashboardComponent implements OnInit {
     this.mounth = mesActual;
     return mesActual;
   }
+
+
+  obtenerNombreMes(numeroMes: number) {
+  const meses = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
+  const fecha = new Date();
+  fecha.setMonth(numeroMes - 1); // establece el mes en base al número, restando 1 para ajustar el índice
+  return meses[fecha.getMonth()];
+}
 }

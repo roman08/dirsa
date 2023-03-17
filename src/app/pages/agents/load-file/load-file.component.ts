@@ -129,7 +129,6 @@ export class LoadFileComponent implements OnInit {
                 //
                 this.agentsDanger = event.body.userNoValid;
                 let data = JSON.stringify(this.agentsDanger);
-                console.log(data);
                 const blob = new Blob([data], { type: 'application/json' });
                 this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
                   window.URL.createObjectURL(blob)

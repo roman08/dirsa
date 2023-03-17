@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-12">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No. Empleado</th>
+                                <th>Nombre</th>
+                                <th>Horas registradas </th>
+                                <th>Horas meta día</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- *ngFor="let detail of details; let i = index" -->
+                            <tr *ngFor="let agent of agents; let i = index">
+                                <td>{{ agent.numero_empleado }}</td>
+                                <td>{{ agent.nombre_completo_agente }}</td>
+                                <td>{{ agent.tiempo_conexion_agente }}</td>
+                                <td>{{horas_meta_dia}} Horas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

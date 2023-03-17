@@ -38,6 +38,8 @@ import { GroupShowComponent } from './groups/group-show/group-show.component';
 import { CampaniaListDetailComponent } from './supervisor/campania-list-detail/campania-list-detail.component';
 import { AgentDetailsComponent } from './agents/agent-details/agent-details.component';
 import { CampaniaListMonthsComponent } from './campanias/campania-list-months/campania-list-months.component';
+import { ShowListAgentsDayComponent } from './supervisor/show-list-agents-day/show-list-agents-day.component';
+import { ShowListAgentsDangerComponent } from './supervisor/show-list-agents-danger/show-list-agents-danger.component';
 
 const materialModules = [
   MatButtonModule,
@@ -73,6 +75,8 @@ const materialModules = [
     CampaniaListDetailComponent,
     AgentDetailsComponent,
     CampaniaListMonthsComponent,
+    ShowListAgentsDayComponent,
+    ShowListAgentsDangerComponent,
   ],
   exports: [
     DashboardComponent,

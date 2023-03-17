@@ -36,7 +36,7 @@ export class CampaniasService {
 
   getAgentsDanger(
     firstDay: string,
-    lastDay: string,
+    lastDay: string | Date,
     id_campania: string | number | null | undefined
   ): Observable<any> {
     // const URL = this.baseUrl + 'campanias/getCampaaniasAdmin';
@@ -195,13 +195,24 @@ export class CampaniasService {
   }
 
   getDataGrafica(id: number | undefined): Observable<any> {
-     const URL = this.baseUrl + `campanias/getDataGrafica?id=${id}`;
-     const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+    const URL = this.baseUrl + `campanias/getDataGrafica?id=${id}`;
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
 
-     const headers = new HttpHeaders()
-       .set('Accept', 'application/json')
-       .set('Authorization', token);
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
 
-     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
+  }
+
+  getAgentsDay(id: string | null, day: any, mes: number): Observable<any> {
+    const URL = this.baseUrl + `campanias/getAgentsMonth?id=${id}&day_register=${day}&mes=${mes}`;
+    const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
+
+    const headers = new HttpHeaders()
+      .set('Accept', 'application/json')
+      .set('Authorization', token);
+
+    return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
   }
 }
