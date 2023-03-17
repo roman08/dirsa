@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { CCPM } from 'src/app/models/ccpm.model';
 import { DataGrafica } from 'src/app/models/dataGrafica.model';
 import { HoursAdmin } from 'src/app/models/hoursAdmin.model';
 import { CampaniasService } from 'src/app/services/campanias.service';
@@ -18,10 +19,12 @@ export class DashboardComponent implements OnInit {
   mounth!: number;
   totalAgentsDanger: number = 0;
   agentsDanger: any[] = [];
-  data: DataGrafica[] = [];
+  data: any[] = [];
+  ccpms: CCPM[] = [];
 
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   user_id: any;
+  id_campania: number = 0;
 
   // TODO : DATOS GRAFICA
   // lineChart
@@ -45,17 +48,29 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.user_id = JSON.parse(this._srvStorage.get('user_id'));
     const mountActuality = this.getMouthActuality();
-    this.getHours(mountActuality, this.user_id);
+    this._srvCampania.getAgentCampanias().subscribe((res) => {
+      if (res.status == 'success') {
+        this.id_campania = res.data[0].id;
+        this.getHours(mountActuality, this.user_id, this.id_campania);
+        
+        // this.campanias = res['data'];
+      }
+    });
 
   }
 
-  getHours(month: number, idUser: number) {
-    this._srvCampania.getHoursSupervisor(month, idUser).subscribe((res) => {
-      this.hours = new HoursAdmin();
-      this.hours = res.data[0];
-      this.getMonth(month, this.hours.id_campania);
-      this.getDataGrafica(this.hours.id_campania);
-    });
+  getHours(month: number, idUser: number, idCampania: number ) {
+    this._srvCampania
+      .getHoursSupervisor(month, idUser, idCampania)
+      .subscribe((res) => {
+        this.hours = new HoursAdmin();
+        this.hours = res.data;
+
+        console.log(this.hours);
+        
+        this.getMonth(month, this.hours.id_campania);
+        this.getDataGrafica(this.hours.id_campania);
+      });
   }
 
   getMonth(month: number, id_campania: number | undefined) {
@@ -67,20 +82,28 @@ export class DashboardComponent implements OnInit {
 
   getDataGrafica(id: number | undefined) {
     this._srvCampania.getDataGrafica(id).subscribe((res) => {
-      this.data = res.data;
-
+      this.data = res.data.hora_grafica;
+      this.ccpms = res.ccpm;
+      
+      
+   
+      
       let horasTotal = [];
       let horasSistema  = [];
       let meses = [];
-      for(let h of this.data){
-        console.log(h);
-        horasTotal.push(h.total_horas);
-        horasSistema.push(h.hr_num);
-        const nMes = Number(h.month_campania);
-        meses.push(this.obtenerNombreMes(nMes));
+
+      for (const key in this.data) {
+        if (this.data.hasOwnProperty(key)) {
+          const mes = this.ccpms.filter((x) => x.id_mes == Number(key))[0];
+          horasTotal.push(mes.total_horas);
+          horasSistema.push(this.data[key]);
+          const nMes = Number(key);
+          meses.push(this.obtenerNombreMes(nMes));
+        }
       }
+
       
-      this.lineChartLabels = meses;
+       this.lineChartLabels = meses;
 
 
 
@@ -157,7 +180,7 @@ export class DashboardComponent implements OnInit {
   }): void {}
 
   searhcHours() {
-    this.getHours(this.mounth, this.user_id);
+    this.getHours(this.mounth, this.user_id, this.id_campania);
   }
 
   getMouthActuality() {

@@ -170,9 +170,9 @@ export class CampaniasService {
     return this.http.get(URL, { headers: headers }).pipe(map((res) => res));
   }
 
-  getHoursSupervisor(mounth: number, id: number): Observable<any> {
+  getHoursSupervisor(mounth: number, id: number, idCampania: number): Observable<any> {
     const URL =
-      this.baseUrl + `campanias/getHoursSupervisor?mounth=${mounth}&id=${id}`;
+      this.baseUrl + `campanias/getHoursSupervisor?mounth=${mounth}&id=${id}&idCampania=${idCampania}`;
     const token = 'Bearer ' + JSON.parse(this._srvStorage.get('token'));
 
     const headers = new HttpHeaders()
