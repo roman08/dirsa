@@ -49,13 +49,9 @@ export class DashboardComponent implements OnInit {
     this.user_id = JSON.parse(this._srvStorage.get('user_id'));
     this.mountActuality = this.getMouthActuality();
     this._srvCampania.getAgentCampanias().subscribe((res) => {
-      console.log(res);
-
       if (res.status == 'success' && res.data.length > 0) {
         this.id_campania = res.data[0].id;
         this.getHours(this.mountActuality, this.user_id, this.id_campania);
-
-        // this.campanias = res['data'];
       }
     });
   }
@@ -66,25 +62,30 @@ export class DashboardComponent implements OnInit {
     this._srvCampania
       .getHoursSupervisor(month, idUser, idCampania)
       .subscribe((res) => {
-        if (res.data.length > 0) {
+
+
+       
+        
+        if (res.data) {
           this.hours = new HoursAdmin();
-          this.hours = res.data[0];
+          this.hours = res.data;
 
-          console.log(this.hours);
 
-          this.getMonth(month, this.hours.id);
-          this.getDataGrafica(this.hours.id);
+          this.getMonth(month, this.hours.id_campania);
+          this.getDataGrafica(this.hours.id_campania);
           this.getAgentsDanger();
         }
       });
   }
 
   getMonth(month: number, id_campania: number | undefined) {
+    
     this._srvCampania.getMonthCampania(month, id_campania).subscribe((res) => {
+
+       
       this.month = new Month();
       this.month = res.data[0];
 
-      console.log(this.month.numero_agentes);
     });
   }
 
