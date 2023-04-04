@@ -5,4 +5,5 @@ export class HoursAdmin {
     fecha_creacion?: Date;
     hrs_campania?:   string;
     tot_agents?:     number;
+    id?:              number;
 }

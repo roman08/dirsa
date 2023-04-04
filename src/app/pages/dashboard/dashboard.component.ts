@@ -21,7 +21,8 @@ export class DashboardComponent implements OnInit {
   agentsDanger: any[] = [];
   data: any[] = [];
   ccpms: CCPM[] = [];
-
+  hrsSystem: string | undefined;
+  mountActuality: number = 0;
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   user_id: any;
   id_campania: number = 0;
@@ -33,7 +34,6 @@ export class DashboardComponent implements OnInit {
 
   lineChartLabels: Array<any> = [];
 
- 
   lineChartLegend: boolean = true;
 
   public lineChartOptions: any = {
@@ -47,29 +47,35 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user_id = JSON.parse(this._srvStorage.get('user_id'));
-    const mountActuality = this.getMouthActuality();
+    this.mountActuality = this.getMouthActuality();
     this._srvCampania.getAgentCampanias().subscribe((res) => {
-      if (res.status == 'success') {
+      console.log(res);
+
+      if (res.status == 'success' && res.data.length > 0) {
         this.id_campania = res.data[0].id;
-        this.getHours(mountActuality, this.user_id, this.id_campania);
-        
+        this.getHours(this.mountActuality, this.user_id, this.id_campania);
+
         // this.campanias = res['data'];
       }
     });
-
   }
 
-  getHours(month: number, idUser: number, idCampania: number ) {
+  getHours(month: number, idUser: number, idCampania: number) {
+    this.lineChartData = [];
+
     this._srvCampania
       .getHoursSupervisor(month, idUser, idCampania)
       .subscribe((res) => {
-        this.hours = new HoursAdmin();
-        this.hours = res.data;
+        if (res.data.length > 0) {
+          this.hours = new HoursAdmin();
+          this.hours = res.data[0];
 
-        console.log(this.hours);
-        
-        this.getMonth(month, this.hours.id_campania);
-        this.getDataGrafica(this.hours.id_campania);
+          console.log(this.hours);
+
+          this.getMonth(month, this.hours.id);
+          this.getDataGrafica(this.hours.id);
+          this.getAgentsDanger();
+        }
       });
   }
 
@@ -77,6 +83,8 @@ export class DashboardComponent implements OnInit {
     this._srvCampania.getMonthCampania(month, id_campania).subscribe((res) => {
       this.month = new Month();
       this.month = res.data[0];
+
+      console.log(this.month.numero_agentes);
     });
   }
 
@@ -84,12 +92,14 @@ export class DashboardComponent implements OnInit {
     this._srvCampania.getDataGrafica(id).subscribe((res) => {
       this.data = res.data.hora_grafica;
       this.ccpms = res.ccpm;
-      
-      
-   
+
+      const hrsSystem = Number(this.data[this.mounth]);
+
+      this.hrsSystem = hrsSystem.toFixed(2); 
+      console.log(this.hrsSystem);
       
       let horasTotal = [];
-      let horasSistema  = [];
+      let horasSistema = [];
       let meses = [];
 
       for (const key in this.data) {
@@ -102,10 +112,7 @@ export class DashboardComponent implements OnInit {
         }
       }
 
-      
-       this.lineChartLabels = meses;
-
-
+      this.lineChartLabels = meses;
 
       this.lineChartData = [
         { data: horasTotal, label: 'Horas meta' },
@@ -191,14 +198,23 @@ export class DashboardComponent implements OnInit {
     return mesActual;
   }
 
-
   obtenerNombreMes(numeroMes: number) {
-  const meses = [
-    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-  ];
-  const fecha = new Date();
-  fecha.setMonth(numeroMes - 1); // establece el mes en base al número, restando 1 para ajustar el índice
-  return meses[fecha.getMonth()];
-}
+    const meses = [
+      'Enero',
+      'Febrero',
+      'Marzo',
+      'Abril',
+      'Mayo',
+      'Junio',
+      'Julio',
+      'Agosto',
+      'Septiembre',
+      'Octubre',
+      'Noviembre',
+      'Diciembre',
+    ];
+    const fecha = new Date();
+    fecha.setMonth(numeroMes - 1); // establece el mes en base al número, restando 1 para ajustar el índice
+    return meses[fecha.getMonth()];
+  }
 }
