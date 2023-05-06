@@ -30,7 +30,7 @@ export class LoadFileComponent implements OnInit {
   id_type_origin: any;
   user_id: number = 0;
   fileUrl!: SafeResourceUrl;
-  showBtnErrors:boolean = false;
+  showBtnErrors: boolean = false;
   constructor(
     private _srvAgents: AgentsService,
     private formBuilder: FormBuilder,
@@ -127,7 +127,33 @@ export class LoadFileComponent implements OnInit {
               if (event.body.userNoValid.length > 0) {
                 this.showBtnErrors = true;
                 //
+                let json = event.body.userNoValid;
+
+                // Convertir el JSON a objeto JavaScript
+                let objetos = event.body.userNoValid;
+
+                // Recorrer cada objeto y eliminar la propiedad deseada
+                for (let i = 0; i < objetos.length; i++) {
+                  delete objetos[i]['VWS'];
+                  delete objetos[i]['System Hrs'];
+                  delete objetos[i]['AFD'];
+                  delete objetos[i]['System Hrs to Away from Desk %'];
+                  delete objetos[i]['30 Minute Break'];
+                  delete objetos[i]['System Hrs Formato HR'];
+                  delete objetos[i]['AFD Formato HR'];
+                  delete objetos[i]['30 Minute Break Formato HR'];
+                  delete objetos[i]['Clicker Time Formato HR'];
+                  delete objetos[i]['Program Training Formato HR'];
+                  delete objetos[i]['Meeting-Supervisor Formato HR'];
+                  delete objetos[i]['Meeting-Troubleshooting Formato HR'];
+                }
+
+                // Convertir el objeto de nuevo a JSON
+                // let nuevoJSON = JSON.stringify(objetos);
                 this.agentsDanger = event.body.userNoValid;
+
+                console.log(this.agentsDanger);
+                this.downloadFile(objetos);
                 let data = JSON.stringify(this.agentsDanger);
                 const blob = new Blob([data], { type: 'application/json' });
                 this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
@@ -150,5 +176,53 @@ export class LoadFileComponent implements OnInit {
       }
     });
     return true;
+  }
+
+  downloadFile(data:  any[], filename = 'data') {
+    let csvData = this.ConvertToCSV(data, [
+      'DisplayName',
+      'No empleado'
+    ]);
+    console.log(csvData);
+    let blob = new Blob(['\ufeff' + csvData], {
+      type: 'text/csv;charset=utf-8;',
+    });
+    let dwldLink = document.createElement('a');
+    let url = URL.createObjectURL(blob);
+    let isSafariBrowser =
+      navigator.userAgent.indexOf('Safari') != -1 &&
+      navigator.userAgent.indexOf('Chrome') == -1;
+    if (isSafariBrowser) {
+      //if Safari open in new window to save file with random filename.
+      dwldLink.setAttribute('target', '_blank');
+    }
+    dwldLink.setAttribute('href', url);
+    dwldLink.setAttribute('download', filename + '.csv');
+    dwldLink.style.visibility = 'hidden';
+    document.body.appendChild(dwldLink);
+    dwldLink.click();
+    document.body.removeChild(dwldLink);
+  }
+
+  ConvertToCSV(objArray: string | any[], headerList: string[]) {
+    let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    let str = '';
+    let row = 'S.No,';
+
+    for (let index in headerList) {
+      row += headerList[index] + ',';
+    }
+    row = row.slice(0, -1);
+    str += row + '\r\n';
+    for (let i = 0; i < array.length; i++) {
+      let line = i + 1 + '';
+      for (let index in headerList) {
+        let head = headerList[index];
+
+        line += ',' + array[i][head];
+      }
+      str += line + '\r\n';
+    }
+    return str;
   }
 }

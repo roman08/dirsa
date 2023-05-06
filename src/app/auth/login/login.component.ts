@@ -10,6 +10,7 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 import swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private _srvAuth: AuthService,
     private _srvStorage: StorageService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private spinner: NgxSpinnerService
   ) {
     this.loginForm = this.formBuilder.group({
       usuario: new FormControl('', [Validators.required]),
@@ -31,7 +33,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('holaaa');
+    
+        this.spinner.show();
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 5000);
+  }
 
   login() {
     const usuario = this.loginForm.value['usuario'];
@@ -55,8 +64,6 @@ export class LoginComponent implements OnInit {
       } else {
         swal.fire('Alerta', respuesta.message, 'error');
 
-
-
         swal.fire({
           title: '<strong><u>DIRSA</u></strong>',
           icon: 'error',
@@ -65,7 +72,6 @@ export class LoginComponent implements OnInit {
           showCancelButton: false,
           focusConfirm: false,
           confirmButtonText: 'Cerrar',
-
         });
       }
     });

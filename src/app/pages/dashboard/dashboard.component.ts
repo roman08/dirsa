@@ -51,9 +51,15 @@ export class DashboardComponent implements OnInit {
     this._srvCampania.getAgentCampanias().subscribe((res) => {
       console.log(res);
 
-      if (res.status == 'success' && res.data.length > 0) {
-        this.id_campania = res.data[0].id;
-        this.getHours(this.mountActuality, this.user_id, this.id_campania);
+      if (res.status == 'success') {
+        if (res.data.length > 0)
+        {
+          console.log('aqi');
+          
+          this.id_campania = res.data[0].id;
+          this.getHours(this.mountActuality, this.user_id, this.id_campania);
+
+        } 
 
         // this.campanias = res['data'];
       }
@@ -66,9 +72,9 @@ export class DashboardComponent implements OnInit {
     this._srvCampania
       .getHoursSupervisor(month, idUser, idCampania)
       .subscribe((res) => {
-        if (res.data.length > 0) {
+        if (res.data) {
           this.hours = new HoursAdmin();
-          this.hours = res.data[0];
+          this.hours = res.data;
 
           console.log(this.hours);
 
