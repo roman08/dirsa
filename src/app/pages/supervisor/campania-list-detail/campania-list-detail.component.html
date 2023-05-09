@@ -57,7 +57,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Fecha</th>
-                                <th>No. agentes reales</th>
+                                <th>Agentes autorizados / Agentes reales</th>
                                 <th>Horas meta </th>
                                 <th>Horas sistema</th>
                                 <th>Estatus</th>
@@ -68,7 +68,7 @@
                             <tr *ngFor="let detail of details; let i = index">
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ detail.fecha | date: 'dd/MM/yyyy' }}</td>
-                                <td>{{ num_agents }}</td>
+                                <td>{{ num_agents }} / {{ detail.count_file }}</td>
                                 <td>{{ horas_meta }}</td>
                                 <td>{{ detail.tiempo_total }}</td>
                                 <td><span class="label  label-rounded label-success"

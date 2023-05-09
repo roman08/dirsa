@@ -17,6 +17,7 @@ export class SidebarComponent implements OnInit {
   imgProfile: string = '';
   email: string = '';
 
+  total = 0;
   constructor(
     private sidebarService: SidebarService,
     private _srvStorage: StorageService,
@@ -24,6 +25,7 @@ export class SidebarComponent implements OnInit {
     private _srvAuth: AuthService
   ) {
     this.role = JSON.parse(this._srvStorage.get('role'));
+    this.total = (this.role == 'Administrador') ? 4 : 2;
     this.menuItems = sidebarService.menu;
     this.nameUser = JSON.parse(this._srvStorage.get('user_name'));
     const imgProfile = this._srvStorage.get('img_profile');

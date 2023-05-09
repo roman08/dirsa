@@ -40,6 +40,7 @@ import { AgentDetailsComponent } from './agents/agent-details/agent-details.comp
 import { CampaniaListMonthsComponent } from './campanias/campania-list-months/campania-list-months.component';
 import { ShowListAgentsDayComponent } from './supervisor/show-list-agents-day/show-list-agents-day.component';
 import { ShowListAgentsDangerComponent } from './supervisor/show-list-agents-danger/show-list-agents-danger.component';
+import { MesPipe } from '../pipes/mes.pipe';
 
 const materialModules = [
   MatButtonModule,
@@ -77,6 +78,7 @@ const materialModules = [
     CampaniaListMonthsComponent,
     ShowListAgentsDayComponent,
     ShowListAgentsDangerComponent,
+    MesPipe
   ],
   exports: [
     DashboardComponent,
@@ -86,6 +88,7 @@ const materialModules = [
     AccountSettingsComponent,
     materialModules,
     BillinguePipe,
+    MesPipe
   ],
   imports: [
     CommonModule,

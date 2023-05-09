@@ -52,7 +52,7 @@ export class GroupCreateComponent implements OnInit {
     this._srvGroup
       .createGroup(nombre, 'Activo', agents, idTypeAgent)
       .subscribe((res) => {
-        swal.fire('Alerta', res.message, 'success');
+        swal.fire('Do It Right', res.message, 'success');
         this.router.navigateByUrl('/dashboard/listado-grupos');
       });
   }

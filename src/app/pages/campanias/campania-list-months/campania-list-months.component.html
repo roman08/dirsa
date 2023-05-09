@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title" style="text-align: end;"><a [routerLink]="['/dashboard/add-month-campania', id_campania]">Agregar mes</a></h4>
+                <h4 class="card-title" style="text-align: end;"><a [routerLink]="['/dashboard/add-month-campania', id_campania]"  class="btn btn-primary">Agregar mes</a></h4>
 
                 <div class="table-responsive">
                     <table class="table">
@@ -21,7 +21,7 @@
                         <tbody>
                             <!-- TODO : LISTADO CAMAPAÑAS -->
                             <tr *ngFor="let month of months">
-                                <td>{{month.id_mes }}</td>
+                                <td>{{month.id_mes | mes }}</td>
                                 <td>{{month.anio }}</td>
                                 <td>{{month.id_campania }}</td>
                                 <td>{{month.dias_habiles}}</td>

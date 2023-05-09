@@ -86,7 +86,7 @@ export class CampaniaCreateComponent implements OnInit {
         const id_campania = res.data;
 
 
-        swal.fire('Alerta', res.message, 'success');
+        swal.fire('Do It Right', res.message, 'success');
 
         this.router.navigate(['/dashboard/add-month-campania', id_campania]);
        

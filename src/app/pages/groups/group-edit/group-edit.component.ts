@@ -88,7 +88,7 @@ export class GroupEditComponent implements OnInit {
     this._srvGroup
       .update(nombre, 'Activo', agents, idTypeAgent, this.id_grupo)
       .subscribe((res) => {
-        swal.fire('Alerta', res.message, 'success');
+        swal.fire('Do It Right', res.message, 'success');
         this.router.navigateByUrl('/dashboard/listado-grupos');
       });
   }

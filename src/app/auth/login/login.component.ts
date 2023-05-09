@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/dashboard');
         }
       } else {
-        swal.fire('Alerta', respuesta.message, 'error');
+        swal.fire('Do It Right', respuesta.message, 'error');
 
         swal.fire({
           title: '<strong><u>DIRSA</u></strong>',

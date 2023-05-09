@@ -85,7 +85,7 @@ export class CampaniaAddMonthComponent implements OnInit {
 
     this._srvCampania.addMonthCampania(body).subscribe((res) => {
       if (res.status == 'success') {
-        swal.fire('Alerta', res.message, 'success');
+        swal.fire('Do It Right', res.message, 'success');
         this.router.navigateByUrl('/dashboard/listado-campanias');
       }
     });

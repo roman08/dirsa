@@ -34,10 +34,10 @@ export class ChangePasswordComponent implements OnInit {
     const email = this.changeForm.value['email'];
     this._srvAuth.sendEmail(email).subscribe((respuesta) => {
       if (respuesta.status === 'success') {
-        swal.fire('Alerta', respuesta.msg, 'success');
+        swal.fire('Do It Right', respuesta.msg, 'success');
         this.router.navigateByUrl('/login');
       } else {
-        swal.fire('Alerta', respuesta.msg, 'error');
+        swal.fire('Do It Right', respuesta.msg, 'error');
       }
     });
   }

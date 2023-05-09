@@ -14,7 +14,7 @@ export class CampaniaListMonthsComponent implements OnInit {
   months: Month[] = [];
   constructor(
     private _srvCampania: CampaniasService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.id_campania = this.route.snapshot.paramMap.get('id');
 
