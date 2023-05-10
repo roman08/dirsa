@@ -13,6 +13,8 @@ import swal from 'sweetalert2';
 })
 export class GroupListComponent implements OnInit {
   groups: Group[] = [];
+  isLoading = false;
+
   constructor(
     private matDialog: MatDialog,
     private router: Router,
@@ -24,9 +26,12 @@ export class GroupListComponent implements OnInit {
   }
 
   getGoups() {
+    this.isLoading = true;
+
     this._srvGroup.getGroups().subscribe((res) => {
       this.groups = [];
       this.groups = res['data'];
+      this.isLoading = false;
     });
   }
 
@@ -47,8 +52,8 @@ export class GroupListComponent implements OnInit {
     this.router.navigateByUrl('/dashboard/crear-grupo');
   }
 
-  delete( id: number) {
-    this._srvGroup.delete(id).subscribe( res => {
+  delete(id: number) {
+    this._srvGroup.delete(id).subscribe((res) => {
       if (res.status === 'success') {
         swal.fire('DIRSA', res.message, 'success');
         this.getGoups();

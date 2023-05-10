@@ -7,11 +7,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingComponent } from '../loading';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ChangePasswordComponent],
-  exports: [LoginComponent, RegisterComponent],
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    ChangePasswordComponent,
+    LoadingComponent,
+  ],
+  exports: [LoginComponent, RegisterComponent, LoadingComponent],
   imports: [
     CommonModule,
     RouterModule,

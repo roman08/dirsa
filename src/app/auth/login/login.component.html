@@ -1,7 +1,8 @@
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
-<ngx-spinner type="ball-beat"></ngx-spinner>
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+
 <section id="wrapper" class="login-register login-sidebar"
     style="background-image:url(./assets/images/background/login-home.jpg);">
     <div class="login-box card">

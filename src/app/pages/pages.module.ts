@@ -41,6 +41,7 @@ import { CampaniaListMonthsComponent } from './campanias/campania-list-months/ca
 import { ShowListAgentsDayComponent } from './supervisor/show-list-agents-day/show-list-agents-day.component';
 import { ShowListAgentsDangerComponent } from './supervisor/show-list-agents-danger/show-list-agents-danger.component';
 import { MesPipe } from '../pipes/mes.pipe';
+import { AuthModule } from '../auth/auth.module';
 
 const materialModules = [
   MatButtonModule,
@@ -101,6 +102,7 @@ const materialModules = [
     FileUploadModule,
     NgChartsModule,
     NgxPaginationModule,
+    AuthModule
   ],
   entryComponents: [CreateGroupComponent],
 })

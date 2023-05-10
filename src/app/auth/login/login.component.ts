@@ -19,6 +19,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  isLoading = false;
 
   constructor(
     private router: Router,
@@ -35,17 +36,19 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('holaaa');
+
     
-        this.spinner.show();
-        setTimeout(() => {
-          this.spinner.hide();
-        }, 5000);
+    setTimeout(() => {
+          // this.isLoading = false;
+
+    }, 5000);
   }
 
   login() {
+    this.isLoading = true;
     const usuario = this.loginForm.value['usuario'];
     const password = this.loginForm.value['password'];
-
+    
     this._srvAuth.login(usuario, password).subscribe((respuesta) => {
       if (respuesta.status === 'success') {
         const role = respuesta['data']['role']['nombre'];
@@ -74,6 +77,10 @@ export class LoginComponent implements OnInit {
           confirmButtonText: 'Cerrar',
         });
       }
+      this.isLoading = false;
+
+          // this.isLoading = false;
+
     });
   }
 
