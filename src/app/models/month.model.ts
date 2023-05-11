@@ -13,4 +13,17 @@ export class Month {
   monto_fijo_mensual?: number;
   created_at?: Date;
   updated_at?: Date;
+  campania?: Campania;
+}
+
+export class Campania {
+  id?: number;
+  nombre?: string;
+  estatus?: string;
+  created_at?: Date;
+  updated_at?: Date;
+  fecha_creacion?: Date;
+  bilingue?: number;
+  id_forma_de_pago?: number;
+  id_type_origin?: number;
 }

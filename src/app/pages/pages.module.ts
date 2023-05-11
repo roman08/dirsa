@@ -42,6 +42,7 @@ import { ShowListAgentsDayComponent } from './supervisor/show-list-agents-day/sh
 import { ShowListAgentsDangerComponent } from './supervisor/show-list-agents-danger/show-list-agents-danger.component';
 import { MesPipe } from '../pipes/mes.pipe';
 import { AuthModule } from '../auth/auth.module';
+import { CoinsPipe } from '../pipes/coins.pipe';
 
 const materialModules = [
   MatButtonModule,
@@ -79,7 +80,8 @@ const materialModules = [
     CampaniaListMonthsComponent,
     ShowListAgentsDayComponent,
     ShowListAgentsDangerComponent,
-    MesPipe
+    MesPipe,
+    CoinsPipe,
   ],
   exports: [
     DashboardComponent,
@@ -89,7 +91,8 @@ const materialModules = [
     AccountSettingsComponent,
     materialModules,
     BillinguePipe,
-    MesPipe
+    MesPipe,
+    CoinsPipe,
   ],
   imports: [
     CommonModule,
@@ -102,7 +105,7 @@ const materialModules = [
     FileUploadModule,
     NgChartsModule,
     NgxPaginationModule,
-    AuthModule
+    AuthModule,
   ],
   entryComponents: [CreateGroupComponent],
 })
