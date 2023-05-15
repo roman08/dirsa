@@ -51,7 +51,9 @@ export class LoginComponent implements OnInit {
     
     this._srvAuth.login(usuario, password).subscribe((respuesta) => {
       if (respuesta.status === 'success') {
+
         const role = respuesta['data']['role']['nombre'];
+        this._srvStorage.set('user_data', respuesta['data']);
         this._srvStorage.set('token', respuesta['access_token']);
         this._srvStorage.set('role', role);
         this._srvStorage.set('user_id', respuesta['data']['id']);

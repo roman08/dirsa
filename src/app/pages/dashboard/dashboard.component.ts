@@ -104,17 +104,23 @@ export class DashboardComponent implements OnInit {
       let meses = [];
 
       for (const key in this.data) {
+        
+        
         if (this.data.hasOwnProperty(key)) {
           const mes = this.ccpms.filter((x) => x.id_mes == Number(key))[0];
           horasTotal.push(mes.total_horas);
           horasSistema.push(this.data[key]);
           const nMes = Number(key);
           meses.push(this.obtenerNombreMes(nMes));
+
+          
         }
       }
 
       this.lineChartLabels = meses;
 
+      console.log(horasTotal);
+      console.log(horasSistema);
       this.lineChartData = [
         { data: horasTotal, label: 'Horas meta' },
         { data: horasSistema, label: 'Horas sistema' },

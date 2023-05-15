@@ -50,6 +50,11 @@ Progress bar
   -o-transition: 5s all;
   transition: 5s all; }
 
+.text-center{
+  display: flex !important;
+  gap: 15px !important;
+}
+
 @-webkit-keyframes myanimation {
   from {
     width: 0; } }

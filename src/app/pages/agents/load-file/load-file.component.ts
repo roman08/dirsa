@@ -31,6 +31,7 @@ export class LoadFileComponent implements OnInit {
   user_id: number = 0;
   fileUrl!: SafeResourceUrl;
   showBtnErrors: boolean = false;
+  fileName: string | undefined;
   constructor(
     private _srvAgents: AgentsService,
     private formBuilder: FormBuilder,
@@ -61,6 +62,9 @@ export class LoadFileComponent implements OnInit {
     let jsonData = null;
     const reader = new FileReader();
     const file = ev.target.files[0];
+    this.fileName = file.name;
+    console.log(this.fileName);
+    
     reader.onload = (event) => {
       const data = reader.result;
       workBook = XLSX.read(data, { type: 'binary' });

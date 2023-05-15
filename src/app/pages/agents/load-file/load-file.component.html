@@ -36,6 +36,7 @@
                             </div>
                             <div class="col-sm-4 text-center centered-div">
                                 <div class="custom-file">
+                                    
                                     <input type="file" class="custom-file-input" id="customFile" name="myfile"
                                         (change)="onFileSelect($event)" #UploadFileInput hidden>
                                     <label class="custom-file-label" for="customFile">{{fileInputLabel }}</label>
@@ -43,13 +44,18 @@
                                             class="mdi mdi-cloud-upload"></i>Cargar archivo</button>
                                 </div>
                             </div>
-
+                            <div class="col-12" style="text-align: center;">
+                                <label class="control-label">{{ fileName }}</label>
+                            </div>
+                            
                             <div class="col-sm-4 text-center">
+                                <a routerLink="/dashboard/listado-campanias" class="btn btn-warning">
+                                    Cancelar</a>
                                 <button class="btn btn-primary" type="submit"><i
                                         class="mdi mdi-content-save"></i>Guardar
                                     datos </button>
                             </div>
-                            <div class="col-sm-8 centered-div">
+                            <div class="col-sm-6 centered-div">
 
                                 <div class="progress ">
                                     <div class="progress-bar bg-success progress-bar-striped active"

@@ -24,6 +24,7 @@ import { AgentDetailsComponent } from './agents/agent-details/agent-details.comp
 import { CampaniaListMonthsComponent } from './campanias/campania-list-months/campania-list-months.component';
 import { ShowListAgentsDayComponent } from './supervisor/show-list-agents-day/show-list-agents-day.component';
 import { ShowListAgentsDangerComponent } from './supervisor/show-list-agents-danger/show-list-agents-danger.component';
+import { ProfileComponent } from '../auth/profile/profile.component';
 
 
 
@@ -158,6 +159,12 @@ const routes: Routes = [
         data: { titulo: 'Agentes / en riesgo' },
         canActivate: [AccesoGuard],
       },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: { titulo: 'Mi perfil' },
+        canActivate: [AccesoGuard],
+        },
       //   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     ],
   },

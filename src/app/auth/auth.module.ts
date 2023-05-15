@@ -8,6 +8,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingComponent } from '../loading';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { LoadingComponent } from '../loading';
     RegisterComponent,
     ChangePasswordComponent,
     LoadingComponent,
+    ProfileComponent,
   ],
   exports: [LoginComponent, RegisterComponent, LoadingComponent],
   imports: [

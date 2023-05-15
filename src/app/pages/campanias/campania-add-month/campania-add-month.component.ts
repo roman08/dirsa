@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { CampaniasService } from 'src/app/services/campanias.service';
 import swal from 'sweetalert2';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-campania-add-month',
@@ -26,7 +28,8 @@ export class CampaniaAddMonthComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private _srvCampania: CampaniasService
+    private _srvCampania: CampaniasService,
+    private _location: Location
   ) {
     this.id_campania = this.route.snapshot.paramMap.get('id');
     this.getDetail(this.id_campania);
@@ -41,13 +44,11 @@ export class CampaniaAddMonthComponent implements OnInit {
       price: new FormControl('', [Validators.required]),
       currency: new FormControl('', [Validators.required]),
       totalHours: new FormControl('', [Validators.required]),
-      fullCost: new FormControl('',[Validators.required]),
+      fullCost: new FormControl('', [Validators.required]),
     });
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   getDetail(id_campania: any) {
     this._srvCampania.geyById(id_campania).subscribe((res) => {
@@ -99,7 +100,6 @@ export class CampaniaAddMonthComponent implements OnInit {
   }
 
   selecMounth(e: any) {
-    console.log();
     this.total_months = this.mounths.filter((x) => x.id_mes == e.value).length;
     if (this.total_months > 0) {
       this.monthForm.controls['month'].reset();
@@ -109,5 +109,9 @@ export class CampaniaAddMonthComponent implements OnInit {
         'error'
       );
     }
+  }
+
+  backClicked() {
+    this._location.back();
   }
 }
