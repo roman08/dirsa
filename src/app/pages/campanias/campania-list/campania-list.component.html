@@ -16,6 +16,7 @@
                                 <th>Bilingue</th>
                                 <th>Forma de pago</th>
                                 <th>Meses registrados</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -30,8 +31,9 @@
                                 <td>{{campania.type_pay.name }}</td>
                                 <!-- <td><a [routerLink]="['/dashboard/add-month-campania', campania.id ]">{{ campania.months.length}}</a></td> -->
                                 <td><a [routerLink]="['/dashboard/list-months', campania.id ]">{{ campania.months.length}}</a></td>
+                                <td><span class="label  label-rounded"
+                                    [ngClass]="{'label-success': campania.estatus === 'Activo', 'label-danger' : campania.estatus === 'Inactivo' }">{{campania.estatus}}</span></td>
                                 <td class="actions">
-                                    <a href="#"><i class="mdi mdi-eye"></i></a>
                                     <a [routerLink]="['/dashboard/campania-edit', campania.id ]"><i class="mdi mdi-pencil"></i></a>
                                     <a (click)="delete(campania.id)" style="cursor: pointer;"><i class="mdi mdi-delete"></i></a>
                                 </td>
