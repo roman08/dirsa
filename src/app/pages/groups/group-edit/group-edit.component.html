@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a routerLink="/dashboard/listado-grupos" class="btn btn-primary"><i
+                        class="mdi mdi-arrow-left-bold"></i> Regresar</a>
+
+                <form (submit)="create()" [formGroup]="groupForm">
+                    <div class="row p-t-20">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Nombre del grupo</label>
+                                <input type="text" id="firstName" class="form-control" placeholder="Nombre del grupo"
+                                    formControlName="nombre" [(ngModel)]="nombreModel">
+                                <!-- <small class="form-control-feedback"> This is inline help </small> -->
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de agente</label>
+                                <select class="form-control custom-select" [(ngModel)]="idTypeAgent"
+                                    (change)="getAgents()" formControlName="idTypeAgent">
+                                    <option value="0">SELECCIONES UN TIPO DE AGENTE</option>
+                                    <option value="1">TRADICIONAL</option>
+                                    <option value="2">BILINGÜE</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-4" *ngFor="let agent of agents">
+
+                            <div class="checkbox checkbox-success">
+                                <input id="checkbox{{agent.id}}" type="checkbox" name="something"
+                                    [(ngModel)]="agent.isChecked" (change)="changeSelection()"
+                                    value="{{agent.nombre_completo}}" [ngModelOptions]="{standalone: true}">
+                                <label class="form-check-label" for="checkbox{{agent.id}}">
+                                    {{ agent.nombre_completo }} - <span style="color: red;">{{ agent.numero_empleado }}</span>
+                                </label>
+                            </div>
+
+
+                        </div>
+                        <!--/span-->
+                    </div>
+
+
+
+
+
+                    <div mat-dialog-actions class="btn-create">
+                        <a routerLink="/dashboard/listado-grupos" class="btn btn-warning">
+                            Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,16 +16,12 @@ export class CreateGroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log( this.data );
     
   }
 
 
   createGroup(){
-    // this._srvGroup.createGroup('Test 3', ' Activo').subscribe( res => {
-    //   console.log(res);
-      
-    // })
+
   }
 
   onNoClick(): void {

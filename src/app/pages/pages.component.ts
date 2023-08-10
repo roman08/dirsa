@@ -9,12 +9,11 @@ declare function customInitFunctions(): void;
   styles: [],
 })
 export class PagesComponent implements OnInit {
-  
-
-  constructor( private settingService: SettingsService) {}
+  year = new Date().getFullYear();
+  constructor(private settingService: SettingsService) {}
 
   ngOnInit(): void {
-   customInitFunctions();
-   customInitFunctions();
+    customInitFunctions();
+    customInitFunctions();
   }
 }

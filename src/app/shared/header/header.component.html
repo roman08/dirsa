@@ -7,7 +7,7 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="javascript:void(0)">
                 <!-- Logo icon --><b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
@@ -94,10 +94,10 @@
                 <!-- Messages -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
+                    <!-- <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-email"></i>
-                        <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-                    </a>
+                        <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div> -->
+                    <!-- </a> -->
                     <div class="dropdown-menu mailbox dropdown-menu-right animated fadeIn fast" aria-labelledby="2">
                         <ul>
                             <li>
@@ -148,27 +148,27 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><img src="./assets/images/users/1.jpg" alt="user"
+                        aria-haspopup="true" aria-expanded="false"><img  [src]="imgProfile" alt="user"
                             class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="./assets/images/users/1.jpg" alt="user"></div>
+                                    <div class="u-img"><img [src]="imgProfile" alt="user"></div>
                                     <div class="u-text">
-                                        <h4>Steave Jobs</h4>
-                                        <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html"
-                                            class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                                        <h4>{{ nameUser }}</h4>
+                                        <p class="text-muted">{{ email }}</p><a routerLink="/dashboard/profile"
+                                            class="btn btn-rounded btn-danger btn-sm">Mi perfil</a>
                                     </div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                            <!-- <li><a href="#"><i class="ti-user"></i> Mi perfil</a></li> -->
 
+                            <!-- <li role="separator" class="divider"></li> -->
+                            <!-- <li><a routerLink="acount-settings"><i class="ti-settings"></i> Account Setting</a></li> -->
                             <li role="separator" class="divider"></li>
-                            <li><a routerLink="acount-settings"><i class="ti-settings"></i> Account Setting</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a (click)="logout()" style="cursor: pointer;"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a (click)="logout()" style="cursor: pointer;"><i class="fa fa-power-off"></i> Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </li>

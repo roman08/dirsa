@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="butomms">
+
+                    <h4 style="text-align: end;">
+                        <a routerLink="/dashboard/agents" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i> Regresar</a>
+                        
+                    </h4>
+                    <h4 class="card-title" style="text-align: end;"><a
+                        [routerLink]="['/dashboard/add-month-campania', id_campania]" class="btn btn-primary">Agregar
+                        mes</a></h4>
+                    </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Mes</th>
+                                <th>Año</th>
+                                <th>Campaña</th>
+                                <th>Dias habiles</th>
+                                <th>Número de agentes</th>
+                                <th>Horas jornada</th>
+                                <th>Precio por hora</th>
+                                <th>Moneda</th>
+                                <th>Costo total</th>
+                                <th>Total horas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- TODO : LISTADO CAMAPAÑAS -->
+                            <tr *ngFor="let month of months">
+                                <td>{{month.id_mes | mes }}</td>
+                                <td>{{month.anio }}</td>
+                                <td>{{month.campania?.nombre }}</td>
+                                <td>{{month.dias_habiles}}</td>
+                                <td>{{month.numero_agentes }}</td>
+                                <td>{{month.hrs_jornada}}</td>
+                                <td>{{month.precio_hr }}</td>
+                                <td> {{ month.tipo_moneda | coins }}</td>
+                                <td>{{ month.total_costo | currency }}</td>
+                                <td>{{ month.total_horas }}</td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

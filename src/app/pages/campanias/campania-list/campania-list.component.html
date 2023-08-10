@@ -12,10 +12,11 @@
                                 <th>ID</th>
                                 <th>Fecha de creación</th>
                                 <th>Campaña</th>
-                                <th>Supervisor</th>
+                                <th>Lider</th>
                                 <th>Bilingue</th>
                                 <th>Forma de pago</th>
                                 <th>Meses registrados</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -26,14 +27,15 @@
                                 <td>{{campania.fecha_creacion }}</td>
                                 <td>{{campania.nombre }}</td>
                                 <td>{{campania.leaders[0].nombre_completo }}</td>
-                                <td>{{campania.bilingue }}</td>
+                                <td>{{campania.bilingue | billingue }}</td>
                                 <td>{{campania.type_pay.name }}</td>
-                                <td><a href="#">{{ campania.months.length}}</a></td>
+                                <!-- <td><a [routerLink]="['/dashboard/add-month-campania', campania.id ]">{{ campania.months.length}}</a></td> -->
+                                <td><a [routerLink]="['/dashboard/list-months', campania.id ]">{{ campania.months.length}}</a></td>
+                                <td><span class="label  label-rounded"
+                                    [ngClass]="{'label-success': campania.estatus === 'Activo', 'label-danger' : campania.estatus === 'Inactivo' }">{{campania.estatus}}</span></td>
                                 <td class="actions">
-                                    <a href="#"><i class="mdi mdi-eye"></i></a>
-                                    <a href="#"><i class="mdi mdi-pencil"></i></a>
-                                    <a href="#"><i class="mdi mdi-delete"></i></a>
-                                    <a [routerLink]="['/dashboard/add-month-campania', campania.id ]"><i class="mdi mdi-plus"></i></a>
+                                    <a [routerLink]="['/dashboard/campania-edit', campania.id ]"><i class="mdi mdi-pencil"></i></a>
+                                    <a (click)="delete(campania.id)" style="cursor: pointer;"><i class="mdi mdi-delete"></i></a>
                                 </td>
                             </tr>
 

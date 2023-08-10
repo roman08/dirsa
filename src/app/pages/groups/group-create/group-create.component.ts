@@ -43,16 +43,18 @@ export class GroupCreateComponent implements OnInit {
 
   create() {
     const nombre = this.groupForm.value['nombre'];
+    const idTypeAgent = this.groupForm.value['idTypeAgent'];
     const agents: number[] = [];
     for (let a of this.selectedItemsList) {
       agents.push(a.id);
     }
 
-    this._srvGroup.createGroup(nombre, 'Activo', agents).subscribe((res) => {
-      console.log(res);
-      swal.fire('Alerta', res.message, 'success');
-      this.router.navigateByUrl('/dashboard/listado-grupos');
-    });
+    this._srvGroup
+      .createGroup(nombre, 'Activo', agents, idTypeAgent)
+      .subscribe((res) => {
+        swal.fire('Do It Right', res.message, 'success');
+        this.router.navigateByUrl('/dashboard/listado-grupos');
+      });
   }
 
   getAgents() {
@@ -63,7 +65,9 @@ export class GroupCreateComponent implements OnInit {
         agent.id = a.id;
         agent.isChecked = false;
         agent.nombre_completo = a.nombre_completo;
+        agent.numero_empleado = a.numero_empleado;
         this.agents.push(agent);
+        
       }
     });
   }

@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a routerLink="/dashboard/listado-campanias" class="btn btn-primary"><i
+                        class="mdi mdi-arrow-left-bold"></i> Regresar</a>
+
+                <form (submit)="create()" [formGroup]="campaniaForm">
+                    <div class="row p-t-20">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Nombre de la campaña</label>
+                                <input type="text" id="firstName" class="form-control"
+                                    placeholder="Nombre de la campaña" formControlName="nombre" [(ngModel)]="nameModel">
+                                <!-- <small class="form-control-feedback"> This is inline help </small> -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Fecha de inicio</label>
+                                <input type="date" class="form-control" placeholder="dd/mm/yyyy"
+                                    formControlName="fechaInicio" [(ngModel)]="fInicioModel">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">BILINGÜE </label>
+                                <div class="form-check">
+                                    <label class="custom-control custom-radio">
+                                        <input [value]="1" name="type" type="radio" class="custom-control-input"
+                                            formControlName="type" [(ngModel)]='typeCampania'>
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">SI</span>
+                                    </label>
+                                    <label class="custom-control custom-radio">
+                                        <input [value]="0" name="type" type="radio" class="custom-control-input"
+                                            formControlName="type" [(ngModel)]='typeCampania'>
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">NO</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Origen de datos</label>
+                                <select class="form-control custom-select" formControlName="origin" [(ngModel)]="originData">
+                                    <option value="0">SELECCIONES UNA OPCIÓN</option>
+                                    <option [value]="origin.id" *ngFor="let origin of origins">{{ origin.name
+                                        }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Lider asignado</label>
+                                <select class="form-control custom-select" formControlName="leader" [(ngModel)]="liderModel">
+                                    <option value="0">SELECCIONES UNA OPCIÓN</option>
+                                    <option [value]="leader.id" *ngFor="let leader of leaders">{{ leader.nombre_completo
+                                        }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Grupo asignado</label>
+                                <select class="form-control custom-select" formControlName="group" [(ngModel)]="grupoModel">
+                                    <option value="0">SELECCIONES UNA OPCIÓN</option>
+                                    <option [value]="group.id" *ngFor="let group of groups">{{ group.nombre }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Forma de pago</label>
+                                <select class="form-control custom-select" formControlName="pay" [(ngModel)]="typeModel">
+                                    <option value="0">SELECCIONES UNA OPCIÓN</option>
+                                    <option [value]="typePay.id" *ngFor="let typePay of typePays">{{ typePay.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--/span-->
+                    </div>
+
+
+
+
+
+                    <div mat-dialog-actions class="btn-create">
+                        <a routerLink="/dashboard/listado-campanias" class="btn btn-warning">
+                            Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

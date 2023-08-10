@@ -1,1 +1,106 @@
-<p>dashboard works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Seleccione un mes para visualizar los datos</label>
+                        <select name="" id="" class="form-control" [(ngModel)]="mounth" (change)="searhcHours()">
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card bg-primary">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center">
+                                        <!-- <img src="../assets/images/icon/income-w.png"
+                                            alt="Income"> -->
+                                        <i class="mdi mdi-human-handsdown"></i>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Agentes totales</h6>
+                                        <h2 class="m-t-0 text-white">{{ month.numero_agentes }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card bg-info">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center">
+                                        <i class="mdi mdi-clock"></i>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Horas meta</h6>
+                                        <h2 class="m-t-0 text-white">{{month.total_horas}} HRS</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card bg-warning">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center">
+                                        <i class="mdi mdi-clock"></i>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Horas sistema</h6>
+                                        <h2 class="m-t-0 text-white">{{ hrsSystem }} HRS</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card bg-danger">
+                            <div class="card-body">
+                                <div class="d-flex no-block">
+                                    <div class="m-r-20 align-self-center">
+                                        <i class="mdi mdi-account-off"></i>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <h6 class="text-white m-t-10 m-b-0">Agentes en riesgo</h6>
+                                        <h2 class="m-t-0 text-white">{{totalAgentsDanger}}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="card-title">Horas meta VS Horas reales</h2>
+                        <h4>2023</h4>
+                        <hr>
+                        <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
+                            [options]="lineChartOptions" [legend]="lineChartLegend" (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

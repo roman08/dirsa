@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-12">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="card-title" style="text-align: end;">
+                            <button class="btn btn-primary" (click)="backClicked()" value=""><i
+                                    class="mdi mdi-arrow-left-bold"></i>
+                                Regresar</button>
+                        </h4>
+                    </div>
+                </div>
+                <h4 class="card-title">Filtros</h4>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Fecha Inicial</label>
+                            <input type="date" id="firstName" class="form-control" placeholder="Nombre de la campaña"
+                                [(ngModel)]="starDate" (change)="selectStartDate()">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Fecha Final</label>
+                            <input type="date" id="firstName" class="form-control" placeholder="Nombre de la campaña"
+                                [(ngModel)]="endDate" [disabled]="validDate" (change)="selectEndDate( )">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" style="padding-top: 32px;">
+                            <button class="btn btn-primary" (click)="search()" value=""> Buscar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Agentes en riesgo <a (click)="showAgents()" class="agentes-riesgo"
+                                style="cursor: pointer; color: red; text-decoration: underline;">{{totalAgentsDanger}}</a>
+                        </h3>
+                    </div>
+                    <div class="col-6">
+                        <h4 class="card-title" style="text-align: end;"><button class="btn btn-primary"
+                                (click)="loadFile()" value=""><i class="mdi mdi-plus"></i> Cargar archivo</button></h4>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>Agentes autorizados / Agentes reales</th>
+                                <th>Horas meta </th>
+                                <th>Horas sistema</th>
+                                <th>Estatus</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let detail of details; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ detail.fecha | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ num_agents }} / {{ detail.count_file }}</td>
+                                <td>{{ horas_meta }}</td>
+                                <td>{{ detail.tiempo_total }}</td>
+                                <td><span class="label  label-rounded label-success"
+                                        style="color: black; font-weight: 400;">REGISTRADO</span></td>
+                                <td class="actions">
+                                    <a style="cursor: pointer;" (click)="showDetail(detail.fecha)"><i
+                                            class="mdi mdi-eye"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-12">
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="text-align: end;">
+                    <button class="btn btn-primary" (click)="backClicked()" value=""><i
+                            class="mdi mdi-arrow-left-bold"></i> Regresar</button>
+                </h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No. Empleado</th>
+                                <th>Nombre</th>
+                                <th>Dias registrados </th>
+                                <th>Días faltantes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- *ngFor="let detail of details; let i = index" -->
+                            <tr *ngFor="let agent of agents | paginate: { itemsPerPage: 10, currentPage: p }">
+                                <td>{{ agent.numero_empleado }}</td>
+                                <td>{{ agent.nombre_completo_agente }}</td>
+                                <td>{{ agent.total_days }}</td>
+                                <td>{{ dayDifference - agent.total_days }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event"
+                        style="text-align: center;"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,7 @@
+
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
 <div class="row">
+
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -11,7 +14,7 @@
                                 <th>ID</th>
                                 <th>Fecha de creación</th>
                                 <th>Nombre del grupo</th>
-                                <th>Total de operadores</th>
+                                <th>Agentes autorizados</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -20,11 +23,11 @@
                                 <td>{{ group.id }}</td>
                                 <td>{{ group.created_at | date: 'dd/MM/yyyy' }}</td>
                                 <td>{{ group.nombre }}</td>
-                                <td><a href="#">{{ group.agentes.length }}</a></td>
+                                <td><a [routerLink]="['/dashboard/group-show', group.id ]">{{ group.agentes.length }}</a></td>
                                 <td class="actions">
-                                    <a href="#"><i class="mdi mdi-eye"></i></a>
-                                    <a href="#"><i class="mdi mdi-pencil"></i></a>
-                                    <a href="#"><i class="mdi mdi-delete"></i></a>
+                                    <!-- <a  href="#"><i class="mdi mdi-eye"></i></a> -->
+                                    <a [routerLink]="['/dashboard/group-edit', group.id ]"><i class="mdi mdi-pencil"></i></a>
+                                    <a (click)="delete(group.id)" style="cursor: pointer;"><i class="mdi mdi-delete"></i></a>
                                 </td>
                             </tr>
 

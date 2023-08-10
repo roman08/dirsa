@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Group } from 'src/app/models/group.mode';
 import { Leader } from 'src/app/models/leader.model';
+import { Origin } from 'src/app/models/origin.model';
 import { TypePay } from 'src/app/models/typePay.model';
 import { CampaniasService } from 'src/app/services/campanias.service';
 import { GeneralService } from 'src/app/services/general.service';
@@ -20,9 +21,11 @@ export class CampaniaCreateComponent implements OnInit {
   typePays: TypePay[] = [];
   leaders: Leader[] = [];
   groups: Group[] = [];
-  favoriteSeason: string | undefined;
-  seasons: string[] = ['Winter', 'Spring'];
+  origins: Origin[] = [];
+
   typeCampania: any;
+  originData: number = 0;
+
   constructor(
     private _srvGeneral: GeneralService,
     private formBuilder: FormBuilder,
@@ -37,6 +40,7 @@ export class CampaniaCreateComponent implements OnInit {
       group: new FormControl(''),
       leader: new FormControl(''),
       type: new FormControl(''),
+      origin: new FormControl(''),
     });
   }
 
@@ -45,13 +49,16 @@ export class CampaniaCreateComponent implements OnInit {
       this.typePays = res.data;
     });
 
-    this._srvGroup.getGroups().subscribe((res) => {
+    this._srvGroup.getGroupFilter().subscribe((res) => {
       this.groups = res.data;
     });
 
     this._srvGeneral.getLeaders().subscribe((res) => {
       this.leaders = res.data;
-      console.log(this.leaders);
+    });
+
+    this._srvGeneral.getOrigins().subscribe((res) => {
+      this.origins = res.data;
     });
   }
 
@@ -62,6 +69,7 @@ export class CampaniaCreateComponent implements OnInit {
     const id_grupo = this.campaniaForm.value['group'];
     const id_supervisor = this.campaniaForm.value['leader'];
     const bilingue = this.campaniaForm.value['type'];
+    const id_type_origin = this.campaniaForm.value['origin'];
 
     const body = {
       nombre: nombre,
@@ -70,17 +78,19 @@ export class CampaniaCreateComponent implements OnInit {
       id_forma_de_pago: id_forma_de_pago,
       id_supervisor: id_supervisor,
       id_grupo: id_grupo,
+      id_type_origin: id_type_origin,
     };
 
-
-    this._srvCampanias.createCampania( body ).subscribe( res => {
-      console.log(res);
+    this._srvCampanias.createCampania(body).subscribe((res) => {
       if (res.status == 'success') {
-        swal.fire('Alerta', res.message, 'success');
-        this.router.navigateByUrl('/dashboard/listado-campanias');
-        // /dashboard/adilost - camapnias;
+        const id_campania = res.data;
+
+
+        swal.fire('Do It Right', res.message, 'success');
+
+        this.router.navigate(['/dashboard/add-month-campania', id_campania]);
+       
       }
-      
     });
   }
 }

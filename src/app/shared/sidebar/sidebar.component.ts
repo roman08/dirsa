@@ -13,6 +13,11 @@ export class SidebarComponent implements OnInit {
   menuItems: any[] | undefined;
   role: string;
 
+  nameUser: string = '';
+  imgProfile: string = '';
+  email: string = '';
+
+  total = 0;
   constructor(
     private sidebarService: SidebarService,
     private _srvStorage: StorageService,
@@ -20,8 +25,17 @@ export class SidebarComponent implements OnInit {
     private _srvAuth: AuthService
   ) {
     this.role = JSON.parse(this._srvStorage.get('role'));
+    this.total = (this.role == 'Administrador') ? 4 : 2;
     this.menuItems = sidebarService.menu;
-    console.log('hola');
+    this.nameUser = JSON.parse(this._srvStorage.get('user_name'));
+    const imgProfile = this._srvStorage.get('img_profile');
+    
+    this.imgProfile = (imgProfile == "")
+      ? JSON.parse(imgProfile)
+      : 'https://www.fgjcdmx.gob.mx/themes/base/assets/images/def-user.png';
+
+
+    this.email = JSON.parse(this._srvStorage.get('email'));
   }
 
   ngOnInit(): void {}
@@ -35,10 +49,7 @@ export class SidebarComponent implements OnInit {
   }
 
   validateRole(data: any[]) {
-
- 
     const result = data.filter((obj) => {
-
       return obj.name === this.role;
     });
 

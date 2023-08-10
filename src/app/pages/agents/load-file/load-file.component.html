@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 style="display: flex; gap: 15px; text-align: end;">
+                    <!-- <a *ngIf="showBtnErrors" [href]="fileUrl" download="registro_errores.txt" class="btn btn-danger">Descargar archivo de errores</a> -->
+                    <a routerLink="/dashboard/listado-campanias" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i>
+                        Regresar</a>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="contenedor">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+                        <div class="row">
+                            
+                            <div class="col-sm-4 text-center">
+                                <div class="form-group">
+                                    <label class="control-label">Fuente de origen</label>
+                                    <select class="form-control custom-select" formControlName="fuente">
+                                        <option [value]="campania.id" *ngFor="let campania of campanias">{{ campania.nombre }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 text-center">
+                                <div class="form-group">
+                                    <label class="control-label">Fecha del reporte</label>
+                                    <input type="date" name="" id="" class="form-control" formControlName="day_register">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 text-center centered-div">
+                                <div class="custom-file">
+                                    
+                                    <input type="file" class="custom-file-input" id="customFile" name="myfile"
+                                        (change)="onFileSelect($event)" #UploadFileInput hidden>
+                                    <label class="custom-file-label" for="customFile">{{fileInputLabel }}</label>
+                                    <button class="btn btn-primary" type="button" (click)="UploadFileInput.click()"><i
+                                            class="mdi mdi-cloud-upload"></i>Cargar archivo</button>
+                                </div>
+                            </div>
+                            <div class="col-12" style="text-align: center;">
+                                <label class="control-label">{{ fileName }}</label>
+                            </div>
+                            
+                            <div class="col-sm-4 text-center">
+                                <a routerLink="/dashboard/listado-campanias" class="btn btn-warning">
+                                    Cancelar</a>
+                                <button class="btn btn-primary" type="submit"><i
+                                        class="mdi mdi-content-save"></i>Guardar
+                                    datos </button>
+                            </div>
+                            <div class="col-sm-6 centered-div">
+
+                                <div class="progress ">
+                                    <div class="progress-bar bg-success progress-bar-striped active"
+                                        style=" height:10px;" [style.width.%]="progress" role="progressbar">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No. Empleado</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Móvil</th>
+                                <th>Campaña</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- TODO : LISTADO CAMAPAÑAS -->
+                            <tr *ngFor="let agent of agents  | paginate: { id: 'server', itemsPerPage: 10, currentPage: p, totalItems: total }">
+                                <td>{{ agent.numero_empleado }}</td>
+                                <td>{{ agent.nombre_completo }}</td>
+                                <td>{{ agent.email }}</td>
+                                <td>----------</td>
+                                <td>{{ agent.campania}}</td>
+                                <td><a [routerLink]="['/dashboard/agente-detail', agent.id ]"><i class="mdi mdi-eye"></i></a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <pagination-controls 
+                        (pageChange)="pageChange($event)" 
+                        id="server"
+                        previousLabel="Anterior"
+                        nextLabel="Siguiente">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <h4 style="text-align: end;">
+                        <a routerLink="/dashboard/agents" class="btn btn-primary"><i class="mdi mdi-arrow-left-bold"></i> Regresar</a>
+
+                    </h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No. Empleado</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Móvil</th>
+                                <th>Campaña</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- TODO : LISTADO CAMAPAÑAS -->
+                            <tr>
+                                <td>{{ agente.numero_empleado }}</td>
+                                <td>{{ agente.nombre_completo }}</td>
+                                <td>{{ agente.email }}</td>
+                                <td>----------</td>
+                                <td>{{ agente.campania}}</td>
+                               
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
